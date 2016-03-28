@@ -6,13 +6,13 @@ var helpers = require('yeoman-test');
 describe('generator-koa-bp:app', function () {
   before(function (done) {
     helpers.run(path.join(__dirname, '../generators/app'))
-      .withPrompts({someAnswer: true})
+      .withPrompts({appName: 'testApi'})
       .on('end', done);
   });
 
   it('creates files', function () {
     assert.file([
-      'dummyfile.txt'
+      'package.json'
     ]);
   });
 });
