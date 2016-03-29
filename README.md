@@ -2,6 +2,7 @@
 [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] 
 [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
 > An opionated koa api boilerplate
+> Implemented from the repository [Koa Boilerplate](https://github.com/drGrove/koa-boilerplate), to make is quick and easy to get started.
 
 ## Installation
 
