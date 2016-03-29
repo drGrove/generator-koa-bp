@@ -12,7 +12,8 @@ describe('generator-koa-bp:app', function () {
 
   it('creates files', function () {
     assert.file([
-      'package.json'
+      'package.json',
+      'README.md'
     ]);
   });
 });

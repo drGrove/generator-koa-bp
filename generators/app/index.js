@@ -4,49 +4,38 @@ var chalk = require('chalk');
 var yosay = require('yosay');
 
 var KoaBP = yeoman.Base.extend({
-  constructor: function() {
+  constructor: function () {
     yeoman.Base.apply(this, arguments);
 
     this.argument('appName', {
       type: String,
       required: false
-    })
+    });
   },
   info: function () {
     this.log(yosay(
       'Welcome to the opinionated koa api ' + chalk.red('generator-koa-bp') + ' generator!'
     ));
   },
-  prompting: function () {
-    var done = this.async();
-
-    // Have Yeoman greet the user.
-    var prompts = [{
-      type: 'prompt',
-      name: 'appName',
-      message: 'What is the name of your api?',
-      default: this.appname || this.appName
-    }, {
-      type: 'prompt',
-      name: 'repositoryLink',
-      message: 'What is the link to your repository?',
-      default: ''
-    }];
-
-    this.prompt(prompts, function (props) {
-      this.props = props;
-      // To access props later use this.props.someAnswer;
-      done();
-    }.bind(this));
-  },
 
   writing: function () {
+    var props = {};
+    for (var key in this.props) {
+      if (key in this.props) {
+        props[key] = this.props[key];
+      }
+    }
+
     this.fs.copyTpl(
       this.templatePath('_package.json'),
       this.destinationPath('package.json'),
-      { appName: this.appname
-      , repositoryLink: this.repositoryLink
-      }
+      props
+    );
+
+    this.fs.copyTpl(
+      this.templatePath('_README.md'),
+      this.destinationPath('README.md'),
+      props
     );
   },
 
@@ -55,4 +44,6 @@ var KoaBP = yeoman.Base.extend({
   }
 });
 
-module.exports = KoaBP
+require('./src/prompts')(KoaBP);
+
+module.exports = KoaBP;
