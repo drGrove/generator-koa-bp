@@ -10,13 +10,13 @@ module.exports = function(KoaBP) {
       type: 'prompt',
       name: 'appName',
       message: 'What is the name of your api?',
-      default: this.appname || this.appName,
+      default: this.appName || this.appname,
       store: true
     }, {
       type: 'prompt',
       name: 'repositoryLink',
       message: 'What is the link to your repository?',
-      default: 'https://github.com/' + uname + '/' + (this.appname || this.appName),
+      default: 'https://github.com/' + uname + '/' + (this.appName || this.appname),
       store: true
     }, {
       type: 'confirm',
@@ -35,7 +35,7 @@ module.exports = function(KoaBP) {
     this.prompt(prompts, function (props) {
       this.props = props;
       // To access props later use this.props.someAnswer;
-      if ( /github/.test(this.props.repositoryLink || '')) {
+      if (/github/.test(this.props.repositoryLink)) {
         this.props.githubEndpoint = this.props.repositoryLink.split('github.com/')[1];
       }
       done();

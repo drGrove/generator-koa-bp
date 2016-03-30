@@ -17,3 +17,19 @@ describe('generator-koa-bp:app', function () {
     ]);
   });
 });
+
+describe('generator-koa-bp:app testApi2', function () {
+  before(function (done) {
+    helpers.run(path.join(__dirname, '../generators/app'))
+      .withArguments(['testApi2'])
+      .withPrompts({})
+      .on('end', done);
+  });
+
+  it('creates files', function () {
+    assert.file([
+      'package.json',
+      'README.md'
+    ]);
+  });
+});
