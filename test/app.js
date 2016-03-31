@@ -2,6 +2,7 @@
 var path = require('path');
 var assert = require('yeoman-assert');
 var helpers = require('yeoman-test');
+var assets = require('./assets.json');
 
 describe('generator-koa-bp:app', function () {
   before(function (done) {
@@ -11,11 +12,7 @@ describe('generator-koa-bp:app', function () {
   });
 
   it('creates files', function () {
-    assert.file([
-      'package.json',
-      'README.md',
-      'nodemon.json'
-    ]);
+    assert.file(assets.baseFiles);
   });
 });
 
@@ -28,10 +25,6 @@ describe('generator-koa-bp:app testApi2', function () {
   });
 
   it('creates files', function () {
-    assert.file([
-      'package.json',
-      'README.md',
-      'nodemon.json'
-    ]);
+    assert.file(assets.baseFiles);
   });
 });

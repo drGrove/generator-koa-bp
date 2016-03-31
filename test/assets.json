@@ -1,0 +1,9 @@
+{ "baseFiles": [
+    "README.md",
+    "CONFIGURATION.md",
+    "package.json",
+    ".gitignore",
+    ".editorconfig",
+    "nodemon.json"
+  ]
+}
