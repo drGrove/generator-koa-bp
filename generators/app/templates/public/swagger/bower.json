@@ -1,0 +1,17 @@
+{
+  "name": "Swagger",
+  "version": "1.0.0",
+  "authors": [
+    "Danny Grove <danny@drgrovellc.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+  }
+}

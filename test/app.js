@@ -11,9 +11,13 @@ describe('generator-koa-bp:app', function () {
       .on('end', done);
   });
 
-  it('creates files', function () {
-    assert.file(assets.baseFiles);
+  it('creates metafiles', function () {
+    assert.file(assets.metaFiles);
   });
+
+  it('creates swagger files', function() {
+    assert.file(assets.useSwagger);
+  })
 });
 
 describe('generator-koa-bp:app testApi2', function () {

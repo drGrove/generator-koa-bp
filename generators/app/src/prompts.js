@@ -36,6 +36,12 @@ module.exports = function(KoaBP) {
       message: 'Would you like to include OAuth Providers (Gooogle, Facebook, Linkined)?',
       default: true,
       store: true
+    }, {
+      type: 'confirm',
+      name: 'useSwagger',
+      message: 'Would you like to use swagger?',
+      default: true,
+      store: true
     }];
 
     this.prompt(prompts, function (props) {
