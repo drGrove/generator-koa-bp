@@ -30,6 +30,12 @@ module.exports = function(KoaBP) {
       message: 'Would you like David DM to keep you informed of the state of your dependencies?',
       default: true,
       store: true
+    }, {
+      type: 'confirm',
+      name: 'includeOAuthProviders',
+      message: 'Would you like to include OAuth Providers (Gooogle, Facebook, Linkined)?',
+      default: true,
+      store: true
     }];
 
     this.prompt(prompts, function (props) {

@@ -13,7 +13,8 @@ describe('generator-koa-bp:app', function () {
   it('creates files', function () {
     assert.file([
       'package.json',
-      'README.md'
+      'README.md',
+      'nodemon.json'
     ]);
   });
 });
@@ -29,7 +30,8 @@ describe('generator-koa-bp:app testApi2', function () {
   it('creates files', function () {
     assert.file([
       'package.json',
-      'README.md'
+      'README.md',
+      'nodemon.json'
     ]);
   });
 });

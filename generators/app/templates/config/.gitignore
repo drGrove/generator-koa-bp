@@ -1,0 +1,21 @@
+# Dependency Folders
+node_modules
+bower_components
+
+# Editor files
+*.sw*
+
+
+# Database Folder
+db/data
+
+# Logs
+logs/**
+*.log
+
+# Configuration JSON Files
+config.json
+migrations/*.json
+
+# Env Files
+*.env
