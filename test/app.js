@@ -4,31 +4,43 @@ var assert = require('yeoman-assert');
 var helpers = require('yeoman-test');
 var assets = require('./assets.json');
 
-describe('generator-koa-bp:app', function () {
-  before(function (done) {
+describe('generator-koa-bp:app', function() {
+  before(function(done) {
     helpers.run(path.join(__dirname, '../generators/app'))
       .withPrompts({appName: 'testApi'})
       .on('end', done);
   });
 
-  it('creates metafiles', function () {
+  it('creates metafiles', function() {
     assert.file(assets.metaFiles);
   });
 
   it('creates swagger files', function() {
     assert.file(assets.useSwagger);
-  })
+  });
+
+  it('creates lib files', function() {
+    assert.file(assets.libFiles);
+  });
 });
 
-describe('generator-koa-bp:app testApi2', function () {
-  before(function (done) {
+describe('generator-koa-bp:app testApi2', function() {
+  before(function(done) {
     helpers.run(path.join(__dirname, '../generators/app'))
       .withArguments(['testApi2'])
       .withPrompts({})
       .on('end', done);
   });
 
-  it('creates files', function () {
-    assert.file(assets.baseFiles);
+  it('creates metafiles', function() {
+    assert.file(assets.metaFiles);
+  });
+
+  it('creates swagger files', function() {
+    assert.file(assets.useSwagger);
+  });
+
+  it('creates lib files', function() {
+    assert.file(assets.libFiles);
   });
 });

@@ -1,9 +1,9 @@
-'use strict'
+'use strict';
 
 module.exports = function(KoaBP) {
   KoaBP.prototype.prompting = function() {
     var done = this.async();
-    var uname = process.env['USER'];
+    var uname = process.env.USER;
 
     // Have Yeoman greet the user.
     var prompts = [{
@@ -16,7 +16,10 @@ module.exports = function(KoaBP) {
       type: 'prompt',
       name: 'repositoryLink',
       message: 'What is the link to your repository?',
-      default: 'https://github.com/' + uname + '/' + (this.appName || this.appname),
+      default: 'https://github.com/' +
+        uname +
+        '/' +
+        (this.appName || this.appname),
       store: true
     }, {
       type: 'confirm',
@@ -27,13 +30,15 @@ module.exports = function(KoaBP) {
     }, {
       type: 'confirm',
       name: 'useDavidDM',
-      message: 'Would you like David DM to keep you informed of the state of your dependencies?',
+      message: 'Would you like David DM to keep you informed ' +
+        'of the state of your dependencies?',
       default: true,
       store: true
     }, {
       type: 'confirm',
       name: 'includeOAuthProviders',
-      message: 'Would you like to include OAuth Providers (Gooogle, Facebook, Linkined)?',
+      message: 'Would you like to include OAuth Providers ' +
+        '(Gooogle, Facebook, Linkined)?',
       default: true,
       store: true
     }, {
@@ -44,13 +49,14 @@ module.exports = function(KoaBP) {
       store: true
     }];
 
-    this.prompt(prompts, function (props) {
+    this.prompt(prompts, function(props) {
       this.props = props;
       // To access props later use this.props.someAnswer;
       if (/github/.test(this.props.repositoryLink)) {
-        this.props.githubEndpoint = this.props.repositoryLink.split('github.com/')[1];
+        this.props.githubEndpoint = this.props.repositoryLink
+          .split('github.com/')[1];
       }
       done();
     }.bind(this));
-  }
+  };
 };

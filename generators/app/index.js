@@ -5,7 +5,7 @@ var yosay = require('yosay');
 var utils = require('./utils');
 
 var KoaBP = yeoman.Base.extend({
-  constructor: function () {
+  constructor: function() {
     yeoman.Base.apply(this, arguments);
     this.utils = utils;
     this.argument('appName', {
@@ -13,13 +13,15 @@ var KoaBP = yeoman.Base.extend({
       required: false
     });
   },
-  info: function () {
+  info: function() {
     this.log(yosay(
-      'Welcome to the opinionated koa api ' + chalk.red('generator-koa-bp') + ' generator!'
+      'Welcome to the opinionated koa api ' +
+      chalk.red('generator-koa-bp') +
+      ' generator!'
     ));
   },
 
-  install: function () {
+  install: function() {
     this.installDependencies();
   }
 });

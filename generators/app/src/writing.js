@@ -10,7 +10,8 @@ module.exports = function(KoaBP) {
     }
     var exclusions = [];
     exclusions.push(this.templatePath('config'));
-    exclusions.push(this.templatePath['public']);
+    exclusions.push(this.templatePath('public'));
+    exclusions.push(this.templatePath('lib'));
 
     var files = this.utils.walk(this.templatePath(), exclusions);
     for (var i = 0; i < files.length; i++) {
@@ -31,5 +32,5 @@ module.exports = function(KoaBP) {
         this.destinationPath('public/')
       );
     }
-  }
+  };
 };

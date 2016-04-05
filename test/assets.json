@@ -6,6 +6,18 @@
     ".editorconfig",
     "nodemon.json"
   ]
+, "libFiles": [
+    "lib/error.js",
+    "lib/errors.json",
+    "lib/checkRole.js",
+    "lib/db.js",
+    "lib/logger.js",
+    "lib/config.js",
+    "lib/ensureAuth.js",
+    "lib/utilities/genRefresh.js",
+    "lib/utilities/genToken.js",
+    "lib/utilities/index.js"
+  ]
 , "useSwagger": [
     "public/swagger/index.html"
   ]
