@@ -5,8 +5,8 @@ var plugins = require('../plugins');
 
 gulp.task('static', function() {
   return gulp.src([
-      config.Paths.ALL_JS,
-      config.Paths.IGNORE_GENERATOR_TEMPLATES
+    config.Paths.ALL_JS,
+    config.Paths.IGNORE_GENERATOR_TEMPLATES
   ])
   .pipe(plugins.excludeGitignore())
   .pipe(plugins.eslint())
