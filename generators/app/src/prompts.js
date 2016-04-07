@@ -1,6 +1,14 @@
 'use strict';
 
+/**
+ * @param {!yeoman.Generator} KoaBP generator
+ * @export
+ */
 module.exports = function(KoaBP) {
+  /**
+   * Prompts user for input necessary to generate code
+   * @function
+   */
   KoaBP.prototype.prompting = function() {
     var done = this.async();
     var uname = process.env.USER;

@@ -1,6 +1,14 @@
 'use strict';
 
+/**
+ * @param {!yeoman.Generator} KoaBP - Generator
+ * @export
+ */
 module.exports = function(KoaBP) {
+  /**
+   * Writes files to users file system
+   * @function
+   */
   KoaBP.prototype.writing = function() {
     var props = {};
     for (var key in this.props) {
