@@ -1,2 +1,12 @@
 node_modules
 coverage
+
+# Vim Files
+[._]*.s[a-w][a-z]
+[._]s[a-w][a-z]
+Session.vim
+.netrwhist
+*~
+
+# Log Files
+**.log
