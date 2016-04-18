@@ -22,6 +22,10 @@ describe('generator-koa-bp:app', function() {
   it('creates lib files', function() {
     assert.file(assets.libFiles);
   });
+
+  it('creates route files', function() {
+    assert.file(assets.routeFiles);
+  });
 });
 
 describe('generator-koa-bp:app testApi2', function() {
@@ -42,5 +46,9 @@ describe('generator-koa-bp:app testApi2', function() {
 
   it('creates lib files', function() {
     assert.file(assets.libFiles);
+  });
+
+  it('creates route files', function() {
+    assert.file(assets.routeFiles);
   });
 });

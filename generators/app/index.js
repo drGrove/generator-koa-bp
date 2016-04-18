@@ -20,6 +20,7 @@ var KoaBP = yeoman.Base.extend({
 require('./src/configure')(KoaBP);
 require('./src/info')(KoaBP);
 require('./src/install')(KoaBP);
+require('./src/files')(KoaBP);
 require('./src/prompts')(KoaBP);
 require('./src/writing')(KoaBP);
 

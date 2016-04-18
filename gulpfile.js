@@ -1,11 +1,11 @@
 'use strict';
+var fs = require('fs');
 var gulp = require('gulp');
-var wrench = require('wrench');
 
-wrench.readdirSyncRecursive('./gulp').filter(function(file) {
+fs.readdirSync('./gulp/tasks').filter(function(file) {
   return (/\.(js|coffee)$/i).test(file);
 }).forEach(function(file) {
-  require('./gulp/' + file);
+  require('./gulp/tasks/' + file);
 });
 
 gulp.task('prepublish', ['nsp']);

@@ -16,29 +16,24 @@ module.exports = function(KoaBP) {
         props[key] = this.props[key];
       }
     }
-    var exclusions = [];
-    exclusions.push(this.templatePath('config'));
-    exclusions.push(this.templatePath('public'));
-    exclusions.push(this.templatePath('lib'));
-
-    var files = this.utils.walk(this.templatePath(), exclusions);
-    for (var i = 0; i < files.length; i++) {
-      var file = files[i];
-      var filename = file.split('/')[file.split('/').length - 1];
-      if (/^_/.test(filename)) {
-        filename = filename.substring(1);
+    for (var idx in this.files) {
+      var file = this.files[idx];
+      try {
+        if (file.template) {
+          this.fs.copyTpl(
+            this.templatePath(file.src),
+            this.destinationPath(file.dest),
+            props);
+        } else {
+          this.fs.copy(
+            this.templatePath(file.src),
+            this.destinationPath(file.dest),
+            props);
+        }
+      } catch (error) {
+        console.error('Template processing error on file', file.src);
+        throw error;
       }
-      this.fs.copyTpl(
-        file,
-        this.destinationPath(filename),
-        props
-      );
-    }
-    if (this.props.useSwagger) {
-      this.fs.copy(
-        this.templatePath('public/**/*'),
-        this.destinationPath('public/')
-      );
     }
   };
 };

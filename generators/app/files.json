@@ -1,0 +1,45 @@
+{
+  "staticFiles": [
+    ".editorconfig",
+    ".sequelizerc",
+    ".gitignore",
+    "nodemon.json",
+    "lib/checkRole.js",
+    "lib/config.js",
+    "lib/db.js",
+    "lib/ensureAuth.js",
+    "lib/error.js",
+    "lib/errors.json",
+    "lib/logger.js",
+    "lib/utilities/genRefresh.js",
+    "lib/utilities/genToken.js",
+    "lib/utilities/index.js",
+    "routes/auth/index.js",
+    "routes/auth/facebook.js",
+    "routes/auth/linkedin.js",
+    "routes/auth/github.js",
+    "routes/auth/google.js",
+    "routes/auth/signup.js",
+    "routes/auth/login.js",
+    "routes/auth/refresh.js",
+    "routes/auth/unlink.js",
+    "routes/auth/logout.js",
+    "routes/users/index.js",
+    "routes/roles/index.js",
+    "routes/routes/index.js",
+    "public/swagger/index.html",
+    "public/swagger/bower.json"
+  ],
+  "templates": [
+    "CONFIGURATION.md",
+    "package.json",
+    "README.md"
+  ],
+  "templates": [
+    "CONFIGURATION.md",
+    "package.json",
+    "README.md",
+    "index.js",
+    "routes/index.js"
+  ]
+}

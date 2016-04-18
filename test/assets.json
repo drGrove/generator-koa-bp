@@ -21,4 +21,20 @@
 , "useSwagger": [
     "public/swagger/index.html"
   ]
+, "routeFiles": [
+    "routes/index.js",
+    "routes/auth/index.js",
+    "routes/auth/facebook.js",
+    "routes/auth/github.js",
+    "routes/auth/google.js",
+    "routes/auth/linkedin.js",
+    "routes/auth/login.js",
+    "routes/auth/logout.js",
+    "routes/auth/refresh.js",
+    "routes/auth/signup.js",
+    "routes/auth/unlink.js",
+    "routes/roles/index.js",
+    "routes/routes/index.js",
+    "routes/users/index.js"
+  ]
 }
