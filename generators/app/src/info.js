@@ -13,5 +13,5 @@ module.exports = function(KoaBP) {
       chalk.red('generator-koa-bp') +
       ' generator!'
     ));
-  }
+  };
 };

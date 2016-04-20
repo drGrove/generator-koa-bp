@@ -11,5 +11,5 @@ module.exports = function(KoaBP) {
    */
   KoaBP.prototype.install = function() {
     this.installDependencies();
-  }
+  };
 };

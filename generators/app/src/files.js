@@ -9,7 +9,7 @@ var files = require('../files.json');
  * @return {function} function that takes in the file from a stream
  */
 function resolvePaths(template) {
-  return function (file) {
+  return function(file) {
     var src = file;
     var dest = file;
 
@@ -23,13 +23,13 @@ function resolvePaths(template) {
       dest: dest,
       template: template
     };
-  }
+  };
 }
 
-module.exports = function (KoaBP) {
+module.exports = function(KoaBP) {
   KoaBP.prototype.prepareFiles = function prepareFiles() {
     this.files = []
       .concat(files.staticFiles.map(resolvePaths(false), this))
       .concat(files.templates.map(resolvePaths(true), this));
-  }
+  };
 };

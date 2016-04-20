@@ -11,16 +11,21 @@
 /* istanbul ignore next */
 module.exports = function replacePrefix(filePath, folderPairs) {
   var bestMatch = '';
-  console.log('pairs: ', folderPairs);
+  var path;
+
   folderPairs.forEach(function(destFolder, sourceFolder) {
-    if (filePath.indexOf(sourceFolder) === 0 && sourceFolder.length > bestMatch.length) {
+    if (filePath.indexOf(sourceFolder) === 0 &&
+      sourceFolder.length > bestMatch.length
+    ) {
       bestMatch = sourceFolder;
     }
   });
 
   if (bestMatch.length) {
-    return filePath.replace(bestMatch, folderPairs[bestMatch]);
+    path = filePath.replace(bestMatch, folderPairs[bestMatch]);
   } else {
-    return filePath;
+    path = filePath;
   }
+
+  return path;
 };
