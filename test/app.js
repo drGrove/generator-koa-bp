@@ -26,6 +26,14 @@ describe('generator-koa-bp:app', function() {
   it('creates route files', function() {
     assert.file(assets.routeFiles);
   });
+
+  it('creates model files', function() {
+    assert.file(assets.modelFiles);
+  });
+
+  it('creates test files', function() {
+    assert.file(assets.testFiles);
+  });
 });
 
 describe('generator-koa-bp:app testApi2', function() {
@@ -50,5 +58,13 @@ describe('generator-koa-bp:app testApi2', function() {
 
   it('creates route files', function() {
     assert.file(assets.routeFiles);
+  });
+
+  it('creates model files', function() {
+    assert.file(assets.modelFiles);
+  });
+
+  it('creates test files', function() {
+    assert.file(assets.testFiles);
   });
 });
