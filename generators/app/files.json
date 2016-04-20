@@ -50,11 +50,6 @@
   "templates": [
     "CONFIGURATION.md",
     "package.json",
-    "README.md"
-  ],
-  "templates": [
-    "CONFIGURATION.md",
-    "package.json",
     "README.md",
     "index.js",
     "routes/index.js"
