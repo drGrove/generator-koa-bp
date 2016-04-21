@@ -43,7 +43,16 @@
     "test/e2e/routes/users/getUsersAuth.spec.js",
     "test/e2e/routes/users/updateUserAuth.spec.js",
     "test/e2e/routes/users/getUserAuth.spec.js",
-    "test/e2e/routes/users/getUsersUnauth.spec.js"
+    "test/e2e/routes/users/getUsersUnauth.spec.js",
+    "gulpfile.js",
+    "gulp/config.js",
+    "gulp/tasks/lint.js",
+    "gulp/tasks/scripts.js",
+    "gulp/tasks/setTesting.js",
+    "gulp/tasks/smokeTest.js",
+    "gulp/tasks/test.js",
+    "gulp/tasks/unit.js",
+    "gulp/tasks/watch.js"
   ],
   "templates": [
     "CONFIGURATION.md",

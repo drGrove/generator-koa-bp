@@ -34,6 +34,10 @@ describe('generator-koa-bp:app', function() {
   it('creates test files', function() {
     assert.file(assets.testFiles);
   });
+
+  it('creates gulp files', function() {
+    assert.file(assets.gulpFiles);
+  });
 });
 
 describe('generator-koa-bp:app testApi2', function() {
@@ -66,5 +70,9 @@ describe('generator-koa-bp:app testApi2', function() {
 
   it('creates test files', function() {
     assert.file(assets.testFiles);
+  });
+
+  it('creates gulp files', function() {
+    assert.file(assets.gulpFiles);
   });
 });
