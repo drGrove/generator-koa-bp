@@ -20,6 +20,7 @@ module.exports = function(KoaBP) {
       if (this.files.hasOwnProperty(idx)) {
         var file = this.files[idx];
         try {
+          console.log('FILE: ', file);
           if (file.template) {
             this.fs.copyTpl(
               this.templatePath(file.src),
@@ -32,7 +33,7 @@ module.exports = function(KoaBP) {
               props);
           }
         } catch (error) {
-          console.error('Template processing error on file', file.src);
+          console.error('Template processing error on file', file.src, error);
           throw error;
         }
       }
