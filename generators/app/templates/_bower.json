@@ -1,5 +1,5 @@
 {
-  "name": "Swagger",
+  "name": "<%= appName %>",
   "version": "1.0.0",
   "authors": [
     "Danny Grove <danny@drgrovellc.com>"
@@ -13,5 +13,8 @@
     "tests"
   ],
   "dependencies": {
+    "angular": "^1.5.6",
+    "bootstrap": "^3.3.6",
+    "angular-swagger-ui": "^0.3.1"
   }
 }

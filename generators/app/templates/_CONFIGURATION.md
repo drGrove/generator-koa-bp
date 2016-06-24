@@ -24,5 +24,5 @@ application to run.
   DATABASE_NAME           # Database Name
   DATABASE_USER           # Database User
   DATABASE_PASS           # Database Password
-  DATABASE_DIALECT        # Database Dialect ie. mysql,mariadb
+  DATABASE_DIALECT        # Database Dialect ie. mysql (use for mariadb also),postgres,sqlite3
 ```
