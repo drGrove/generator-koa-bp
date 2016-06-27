@@ -1,8 +1,8 @@
 {
   "core": [
     ".editorconfig",
-    ".gitignore",
     ".sequelizerc",
+    "_.gitignore",
     "_index.js",
     "_package.json",
     "_CONFIGURATION.md",

@@ -6,9 +6,15 @@
 [![Dependencies](https://david-dm.org/<%= githubEndpoint %>.svg)](https://david-dm.org/<%= githubEndpoint %>)
 <% } -%>
 
+``
+
 ##Getting Started
 ```bash
 $ git clone <%= repositoryLink %>
 $ npm install
 $ node run start-debug
+```
+###First Time?
+```
+$ ./bin/init.sh
 ```

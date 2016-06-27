@@ -1,9 +1,15 @@
+# Base files
 node_modules
 bower_components
 *.sw*
 *.log
-db/data
 *.env
 config.json
 logs/**
+
+# MySQL Database files
+db/data
 migrations/*.json
+
+# ENV Files
+./*.env

@@ -31,6 +31,7 @@
     "swagger-jsdoc": "^1.2.1",
     "swagger-koa": "^1.0.8",
     "swagger-ui": "^2.1.2",
+    "node-env-file": "^0.1.7",
     "winston": "^1.1.1"
   },
   "devDependencies": {
@@ -52,7 +53,6 @@
     "minimist": "^1.2.0",
     "mocha": "^2.3.4",
     "mocha-steps": "0.0.1",
-    "node-env-file": "^0.1.7",
     "nodemon": "^1.7.1",
     "sequelize-cli": "^1.9.1",
     "should": "^7.1.0",
@@ -93,9 +93,7 @@
     "validthis": true
   },
   "scripts": {
-    "createDatabase": "sh ./scripts/createDatabase.sh",
     "migrate": "npm run sequelize db:migrate",
-    "postinstall": "./bin/init.sh",
     "seed": "npm run sequelize db:seed",
     "seed-migrate": "npm run seed && npm run migrate",
     "sequelize": "./node_modules/.bin/sequelize",
