@@ -38,7 +38,7 @@ function writeEnvFile {
 }
 
 function runMigrations {
-  NODE_ENV=$environment npm run migrate
+  NODE_ENV=$environment npm run migrate-seed
 }
 
 getDbCreds
