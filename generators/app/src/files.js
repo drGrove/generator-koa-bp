@@ -27,7 +27,6 @@ function resolvePaths(files) {
     };
   });
 
-  console.log('FILE: ', files);
   return files;
 }
 
