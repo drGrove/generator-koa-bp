@@ -1,8 +1,4 @@
 #!/bin/bash
-function getEnvironment {
-  printf "Environment: "
-  read environment
-}
 
 function getDbCreds {
   printf "DATABASE USERNAME: "
@@ -16,34 +12,60 @@ function getDbCreds {
 function getRootCreds {
   printf "ROOT USERNAME: "
   read root_username
+  read -s -p "ROOT PASSWORD: " root_password
 }
 
 function createDatabase {
-  echo "Creating database: "$db_name
-  mysql -u $root_username -p -e \
-    "create database if not exists $db_name;\n
+  if [ "$1" ]; then
+    env_name=$1
+    if [ $1 != "production" ]; then
+      rel_db_name="${db_name}_${env_name}"
+    else
+      rel_db_name="${db_name}"
+    fi
+    echo "Creating database: "$rel_db_name
+    SQL="create database if not exists $rel_db_name;\n
     create user if not exists '$db_username'@'localhost' identified by '$db_password';\n
-    grant all privileges on $db_name.* to $db_username@'localhost';\n
+    grant all privileges on $rel_db_name.* to $db_username@'localhost';\n
     flush privileges;
     "
+    if [ -z "$root_password" ];then
+      echo "Please enter ROOT database password"
+      mysql -u $root_username -p$root_password -e "${SQL}"
+    else
+      mysql -u $root_username -e "${SQL}"
+    fi
+    echo ""
+  else
+    echo "Could not create database"
+  fi
 }
 
 function writeEnvFile {
-  printf "Writing Environment file: $environment.env"
-  echo "# $environment ENV" > "$environment.env"
-  echo "DATABASE_USER=$db_username" >> "$environment.env"
-  echo "DATABASE_PASS=$db_password" >> "$environment.env"
-  echo "DATABASE_NAME=$db_name" >> "$environment.env"
-  echo "DATABASE_DIALECT=mysql" >> "$environment.env"
+  if [ "$1" ]; then
+    env_name=$1
+    printf "Writing Environment file: $env_name.env"
+    echo "# $env_name ENV" > "$env_name.env"
+    echo "DATABASE_USER=$db_username" >> "$env_name.env"
+    echo "DATABASE_PASS=$db_password" >> "$env_name.env"
+    echo "DATABASE_NAME=$rel_db_name" >> "$env_name.env"
+    echo "DATABASE_DIALECT=mysql" >> "$env_name.env"
+    echo ""
+  else
+    echo "Environment names could not be found."
+  fi
 }
 
 function runMigrations {
-  NODE_ENV=$environment npm run migrate-seed
+  NODE_ENV=$1 npm run migrate-seed
 }
 
 getDbCreds
-getEnvironment
 getRootCreds
-createDatabase
-writeEnvFile
-runMigrations
+environments=(development testing production)
+for var in ${environments[@]};
+do
+  createDatabase "${var}"
+  writeEnvFile "${env_name}"
+  runMigrations "${var}"
+done

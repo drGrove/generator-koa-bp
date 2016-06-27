@@ -94,7 +94,7 @@
   },
   "scripts": {
     "migrate": "npm run sequelize db:migrate",
-    "migrate-seed": "npm run seed && npm run migrate",
+    "migrate-seed": "npm run migrate && npm run seed",
     "seed": "npm run sequelize db:seed",
     "sequelize": "./node_modules/.bin/sequelize",
     "smokeTest": "PROJECT_ROOT=$PWD gulp smokeTest",
