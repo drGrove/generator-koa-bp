@@ -4,7 +4,9 @@
     "package.json",
     ".gitignore",
     ".editorconfig",
-    "nodemon.json"
+    "nodemon.json",
+    "bin/init.sh",
+    "bin/init.exp"
   ]
 , "libFiles": [
     "lib/error.js",
@@ -24,10 +26,6 @@
 , "routeFiles": [
     "routes/index.js",
     "routes/auth/index.js",
-    "routes/auth/facebook.js",
-    "routes/auth/github.js",
-    "routes/auth/google.js",
-    "routes/auth/linkedin.js",
     "routes/auth/login.js",
     "routes/auth/logout.js",
     "routes/auth/refresh.js",
@@ -36,6 +34,12 @@
     "routes/roles/index.js",
     "routes/routes/index.js",
     "routes/users/index.js"
+  ]
+, "oAuthFiles": [
+    "routes/auth/facebook.js",
+    "routes/auth/github.js",
+    "routes/auth/google.js",
+    "routes/auth/linkedin.js"
   ]
 , "modelFiles": [
     "models/roles.js",
@@ -66,6 +70,17 @@
     "gulp/tasks/test.js",
     "gulp/tasks/unit.js",
     "gulp/tasks/watch.js"
-
+  ],
+  "mysqlFiles": [
+    "bin/create_database.sh",
+    "migrations/mysql/20151114111941-create-user-table.js",
+    "migrations/mysql/20151114115822-create-role-table.js",
+    "migrations/mysql/20151114115827-create-route-table.js",
+    "migrations/mysql/20151114115934-create-route-roles-table.js",
+    "migrations/mysql/20151114120033-create-tokens-table.js",
+    "migrations/mysql/20151115112013-create-user-roles-table.js",
+    "migrations/seeders/20151024165433-routes.js",
+    "migrations/seeders/20151024171615-defaultroles.js",
+    "migrations/seeders/20151025184503-defaultuserroles.js"
   ]
 }
