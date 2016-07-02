@@ -1,0 +1,28 @@
+#!/usr/bin/expect
+
+set timeout 20
+
+set user [lindex $argv 0]
+set password [lindex $argv 1]
+set db_name_password [lindex $argv 2]
+
+spawn ./bin/init.sh
+
+expect "DATABASE USERNAME: "
+send "$user\r"
+
+expect "DATABASE NAME: "
+send "$db_name_password\r"
+
+expect "DATABASE PASSWORD: "
+send "$password\r"
+
+expect "ROOT USERNAME: "
+send "root\r"
+
+expect "ROOT PASSWORD: "
+send "\r"
+
+expect "Enter password: "
+send "\r"
+interact

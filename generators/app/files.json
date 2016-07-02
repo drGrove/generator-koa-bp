@@ -8,6 +8,7 @@
     "_CONFIGURATION.md",
     "_README.md",
     "bin/_init.sh",
+    "bin/_init.exp",
     "gulpfile.js",
     "gulp/config.js",
     "gulp/tasks/lint.js",
