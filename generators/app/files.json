@@ -1,6 +1,7 @@
 {
   "core": [
     ".editorconfig",
+    ".eslintrc",
     ".sequelizerc",
     "_.gitignore",
     "_index.js",
