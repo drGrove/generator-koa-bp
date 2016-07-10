@@ -6,7 +6,9 @@ var db = require(path.join(__dirname, '/../lib/db'));
 fs
   .readdirSync(__dirname)
   .filter(function(file) {
-    return (file.indexOf('.') !== 0) && (file !== 'index.js');
+    return (file.indexOf('.') !== 0)
+      && (file !== 'index.js')
+      && (file.indexOf('.js') !== -1);
   })
   .forEach(function(file) {
     var model = db.sequelize.import(path.join(__dirname, file));
