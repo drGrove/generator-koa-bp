@@ -1,6 +1,6 @@
 {
   "name": "generator-koa-bp",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "description": "An opionated koa api boilerplate",
   "homepage": "https://github.com/drGrove/generator-koa-bp",
   "author": {
