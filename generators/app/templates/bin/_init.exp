@@ -21,8 +21,15 @@ expect "ROOT USERNAME: "
 send "root\r"
 
 expect "ROOT PASSWORD: "
-send "\r"
+send "root\r"
 
 expect "Enter password: "
 send "\r"
-interact
+
+# Send empty password for root
+set timeout 20
+send "\r"
+set timeout 20
+send "\r"
+set timeout 20
+send "\r"
