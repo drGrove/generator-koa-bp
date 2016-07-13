@@ -12,7 +12,7 @@ describe('GET: AUTHORIZED: /users/me', function() {
   before( function(done) {
     co( function*() {
       res = yield request
-        .get(config.app.namespace + '/users/me')
+        .get(`${config.app.namespace}users/me`)
         .set('Authorization', 'Bearer ' + process.env.USER_TOKEN)
         .end();
       done();

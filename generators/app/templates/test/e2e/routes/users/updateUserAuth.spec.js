@@ -16,7 +16,7 @@ describe('PUT: AUTHORIZED: /users/me', function() {
   before( function(done) {
     co( function*() {
       res = yield request
-        .put(config.app.namespace + '/users/me')
+        .put(`${config.app.namespace}users/me`)
         .set('Authorization', 'Bearer ' + process.env.USER_TOKEN)
         .send(body)
         .end();

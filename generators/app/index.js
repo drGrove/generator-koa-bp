@@ -22,6 +22,7 @@ require('./src/info')(KoaBP);
 require('./src/install')(KoaBP);
 require('./src/files')(KoaBP);
 require('./src/prompts')(KoaBP);
+require('./src/writeYoRc')(KoaBP);
 require('./src/writing')(KoaBP);
 
 /**

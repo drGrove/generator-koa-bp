@@ -1,7 +1,9 @@
 'use strict';
 
 var koa = require('koa');
+<% if (useSwagger) { -%>
 var swagger = require('swagger-koa');
+<% } -%>
 var bodyParser = require('koa-bodyparser');
 var morgan = require('koa-morgan');
 var responseTime = require('koa-response-time');
@@ -66,11 +68,11 @@ if (process.env.NODE_ENV !== 'PRODUCTION') {
   app.use(swagger.init({
     apiVersion: '1.0',
     swaggerVersion: '2.0',
-    swaggerURL: config.app.namespace + '/swagger',
-    swaggerJSON: config.app.namespace + '/docs',
-    swaggerUI: 'node_modules/swagger-ui/dist',
+    swaggerURL: `${config.app.namespace}swagger`,
+    swaggerJSON: `${config.app.namespace}docs.json`,
     // swaggerUI: './public/swagger/',
-    basePath: 'http://' + config.app.domain + ':' + config.app.port,
+    swaggerUI: 'node_modules/swagger-ui/dist',
+    basePath: `http://${config.app.domain}:${config.app.port}`,
     info: {
       title: 'API',
       description: 'Blah'

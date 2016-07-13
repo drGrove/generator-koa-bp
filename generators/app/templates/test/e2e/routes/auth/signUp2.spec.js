@@ -24,7 +24,7 @@ describe('SignUp:', function() {
     before( function(done) {
       co( function*() {
         res = yield request
-          .post(config.app.namespace + '/auth/signup')
+          .post(`${config.app.namespace}auth/signup`)
           .set('Content-Type', 'application/json')
           .send(userBody)
           .end();

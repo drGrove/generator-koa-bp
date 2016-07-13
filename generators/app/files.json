@@ -54,7 +54,9 @@
     "test/e2e/routes/users/getUsersAuth.spec.js",
     "test/e2e/routes/users/updateUserAuth.spec.js",
     "test/e2e/routes/users/getUserAuth.spec.js",
-    "test/e2e/routes/users/getUsersUnauth.spec.js"
+    "test/e2e/routes/users/getUsersUnauth.spec.js",
+    "test/e2e/env/common.env",
+    "test/e2e/env/updateUser.env"
   ],
   "oAuth": [
     "routes/auth/facebook.js",

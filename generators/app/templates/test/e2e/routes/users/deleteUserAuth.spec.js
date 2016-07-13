@@ -18,7 +18,7 @@ describe('DELETE: AUTHORIZED: /users/:id', function() {
   before(function(done) {
     co(function*() {
       res = yield request
-        .delete(config.app.namespace + '/users/me')
+        .delete(`${config.app.namespace}users/me`)
         .set('Authorization', 'Bearer ' + process.env.USER_TOKEN)
         .end();
       done();

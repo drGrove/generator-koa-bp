@@ -13,6 +13,7 @@ function getRootCreds {
   printf "ROOT USERNAME: "
   read root_username
   read -s -p "ROOT PASSWORD: " root_password
+  echo ""
 }
 
 function createDatabase {
@@ -23,13 +24,18 @@ function createDatabase {
     else
       rel_db_name="${db_name}"
     fi
-    echo "Creating database: "$rel_db_name
-    SQL="create database if not exists $rel_db_name;\n
-    create user if not exists '$db_username'@'localhost' identified by '$db_password';\n
-    grant all privileges on $rel_db_name.* to $db_username@'localhost';\n
+    echo ""
+    echo "Creating database: ${rel_db_name}"
+    echo "This will modify base files in mysql to allow for start issues"
+    echo "between versions by setting innodb file format to BARRACUDA"
+    echo "and turning on large prefix"
+    SQL="set global innodb_file_format = BARRACUDA;\n
+    set global innodb_large_prefix = ON;\n
+    create database if not exists $rel_db_name;\n
+    grant all privileges on $rel_db_name.* to $db_username@'localhost' identified by '${db_password}';\n
     flush privileges;
     "
-    if [ -z "$root_password" ];then
+    if [ -z "$root_password" ]; then
       echo "Please enter ROOT database password"
       mysql -u $root_username -p$root_password -e "${SQL}"
     else

@@ -16,7 +16,7 @@ describe('Auth:', function() {
   before( function(done) {
     co( function*() {
       res = yield request
-        .post(config.app.namespace + '/auth/login')
+        .post(`${config.app.namespace}auth/login`)
         .set('Content-Type', 'application/json')
         .send({
           email: process.env.USER_EMAIL,
