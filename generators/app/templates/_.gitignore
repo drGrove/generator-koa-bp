@@ -3,7 +3,6 @@ node_modules
 bower_components
 *.sw*
 *.log
-*.env
 config.json
 logs/**
 
@@ -12,4 +11,6 @@ db/data
 migrations/*.json
 
 # ENV Files
-./*.env
+development.env
+testing.env
+production.env

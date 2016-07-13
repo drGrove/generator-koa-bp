@@ -17,7 +17,7 @@ describe('GET: UNAUTHORIZED: /users', function() {
   before( function(done) {
     co( function*() {
       res = yield request
-        .get(config.app.namespace + '/users/me');
+        .get(`${config.app.namespace}users/me`);
       done();
     });
   });

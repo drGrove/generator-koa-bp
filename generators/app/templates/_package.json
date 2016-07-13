@@ -7,7 +7,7 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "<%- repositoryLink %>/issues"
+    "url": "<%= repositoryLink %>/issues"
   },
   "dependencies": {
     "bcryptjs": "^2.2.1",
@@ -28,9 +28,6 @@
     "path": "^0.11.14",
     "querystring": "^0.2.0",
     "sequelize": "^3.5.1",
-    "swagger-jsdoc": "^1.2.1",
-    "swagger-koa": "^1.0.8",
-    "swagger-ui": "^2.1.2",
     "node-env-file": "^0.1.7",
     "winston": "^1.1.1"
   },
@@ -57,6 +54,11 @@
     "sequelize-cli": "^1.9.1",
     "should": "^7.1.0",
     "supertest": "^1.1.0",
+<% if (useSwagger) { -%>
+    "swagger-jsdoc": "^1.2.1",
+    "swagger-koa": "^1.0.8",
+    "swagger-ui": "^2.1.2",
+<% } -%>
     "wrench": "^1.5.8"
   },
   "jscsConfig": {
@@ -94,7 +96,7 @@
   },
   "scripts": {
     "migrate": "npm run sequelize db:migrate",
-    "migrate-seed": "npm run migrate && npm run seed",
+    "migrate-seed": "npm run migrate && npm run seed:all",
     "seed": "npm run sequelize db:seed",
     "sequelize": "./node_modules/.bin/sequelize",
     "smokeTest": "PROJECT_ROOT=$PWD gulp smokeTest",
