@@ -36,7 +36,7 @@ var routes = function(app) {
         for (var path in paths[method]) {
           if (paths[method].hasOwnProperty(path)) {
             var args = paths[method][path];
-            var uri = '/' + dir + path;
+            var uri = `${config.app.namespace}` + dir + path;
             if (Array.isArray(args)) {
               r[method.toLowerCase()](uri, compose(args));
             } else {
