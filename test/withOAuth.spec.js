@@ -6,7 +6,7 @@ var assert = require('yeoman-assert');
 var helpers = require('yeoman-test');
 var assets = require('./assets.json');
 
-describe('with oAuth', function() {
+describe('Make app with OAuth providers', function() {
   this.timeout(200000000);
   var tempDir;
   before(function(done) {

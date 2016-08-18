@@ -5,7 +5,7 @@ var assert = require('yeoman-assert');
 var helpers = require('yeoman-test');
 var assets = require('./assets.json');
 
-describe('with named application', function() {
+describe('Make app with named application', function() {
   var tempDir;
   before(function(done) {
     helpers.run(path.join(__dirname, '../generators/app'))
