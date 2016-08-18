@@ -38,6 +38,7 @@
     "gulp-mocha": "^2.2",
     "gulp-nsp": "^2.1.0",
     "gulp-plumber": "^1.0.0",
+    "sequelize": "^3.24.0",
     "wrench": "^1.5.9",
     "yeoman-assert": "^2.0.0",
     "yeoman-test": "^1.0.0"
@@ -62,7 +63,8 @@
       "array-bracket-spacing": "off",
       "no-spaced-func": "off",
       "space-in-parens": "off",
-      "no-unexpected-multiline": "off"
+      "no-unexpected-multiline": "off",
+      "max-nested-callbacks": "off"
     }
   },
   "repository": "git@github.com:drGrove/generator-koa-bp",

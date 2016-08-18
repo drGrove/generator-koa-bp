@@ -25,12 +25,12 @@ describe('GET: AUTHORIZED: /users', function() {
   });
 
   it('Should be an array', function(done) {
-    expect(Array.isArray(res.body)).toBe(true);
+    expect(Array.isArray(res.body.data)).toBe(true);
     done();
   });
 
   it('Should have a length', function(done) {
-    expect(res.body.length || 0).toBeGreaterThan(0);
+    expect(res.body.data.length || 0).toBeGreaterThan(0);
     done();
   });
 });

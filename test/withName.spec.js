@@ -6,14 +6,28 @@ var helpers = require('yeoman-test');
 var assets = require('./assets.json');
 
 describe('with named application', function() {
+  var tempDir;
   before(function(done) {
     helpers.run(path.join(__dirname, '../generators/app'))
       .withArguments(['testApi2'])
       .withPrompts({})
       .toPromise()
-      .then(function() {
+      .then(function(dir) {
+        tempDir = dir;
         done();
       });
+  });
+
+  after(function(done) {
+    let deleteTmp = spawn
+      ( 'rm'
+        , [ '-r'
+        , `/tmp/${tempDir}`
+        ]
+      );
+    deleteTmp.on('close', function() {
+      done();
+    });
   });
 
   it('creates metafiles', function() {
@@ -48,3 +62,4 @@ describe('with named application', function() {
     assert.file(assets.mysqlFiles);
   });
 });
+

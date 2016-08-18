@@ -30,14 +30,14 @@ describe('Auth:', function() {
   describe('POST /auth/login -', function() {
     it('Should return a JWT', function(done) {
       expect(res.body).toBeA('object');
-      expect(res.body.token).toBeA('string');
-      expect(res.body.token.length).toBeGreaterThan(10);
-      process.env.USER_TOKEN = res.body.token;
+      expect(res.body.data.token).toBeA('string');
+      expect(res.body.data.token.length).toBeGreaterThan(10);
+      process.env.USER_TOKEN = res.body.data.token;
       done();
     });
 
     it('Should set USER_TOKEN', function(done) {
-      expect(process.env.USER_TOKEN).toBe(res.body.token);
+      expect(process.env.USER_TOKEN).toBe(res.body.data.token);
       done();
     });
   });

@@ -5,7 +5,7 @@ var files = require('../files.json');
 /**
  * Takes a template file path and creates a copy description object
  * Adds an _ to the file's basename if it's a template
- * @param {boolean} template is a template file
+ * @param {array} files is a template file
  * @return {function} function that takes in the file from a stream
  */
 function resolvePaths(files) {
@@ -15,7 +15,7 @@ function resolvePaths(files) {
     var template = false;
     var basename = path.basename(file);
     var filename = basename.split('/')[basename.split('/').length - 1];
-    if (filename.indexOf('_') == 0) {
+    if (filename.indexOf('_') === 0) {
       dest = file.replace(filename, filename.slice(1));
       template = true;
     }
@@ -34,8 +34,8 @@ module.exports = function(KoaBP) {
   KoaBP.prototype.prepareFiles = function prepareFiles() {
     var props = this.props;
     var fileList = [];
-    Object.keys(files).map(function(key) {
-      switch(key) {
+    Object.keys(files).forEach(function(key) {
+      switch (key) {
         case 'oAuth':
           if (props.includeOAuthProviders) {
             fileList = fileList.concat(resolvePaths(files[key]));
@@ -43,7 +43,6 @@ module.exports = function(KoaBP) {
           break;
         default:
           fileList = fileList.concat(resolvePaths(files[key]));
-
       }
     });
     this.files = fileList;

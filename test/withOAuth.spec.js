@@ -15,23 +15,35 @@ describe('with oAuth', function() {
         appName: 'testApi',
         includeOAuthProviders: true
       })
-      .toPromise()
+    .toPromise()
       .then(function(dir) {
         tempDir = dir;
         const npmInstall = spawn
           ( 'npm'
-          , [ '--silent'
+            , [ '--silent'
             , '--prefix'
             , `${dir}`
             , 'install'
             , `${dir}`
             ]
-          )
+          );
         npmInstall.on('close', code => {
           console.log(`npm install exited with code: ${code}`);
           done();
-        })
+        });
       });
+  });
+
+  after(function(done) {
+    let deleteTmp = spawn
+      ( 'rm'
+        , [ '-r'
+        , `/tmp/${tempDir}`
+        ]
+      );
+    deleteTmp.on('close', function() {
+      done();
+    });
   });
 
   describe('Creates base files', function() {
@@ -72,81 +84,43 @@ describe('with oAuth', function() {
     });
   });
   describe('Test App', function() {
-    describe('Initalize Database', function() {
-      const DB_CREDS =
-        [ 'testUser'
-        , 'testPassword'
+    this.timeout(200 * 1000);
+    const DB_CREDS =
+      [ 'testUser'
+      , 'testPassword'
         , 'testDB'
-        ];
-      before(function(done) {
-        const init = spawn
-          ( path.join(tempDir, '/bin/init.exp')
+      ];
+    before(function(done) {
+      const init = spawn
+        ( path.join(tempDir, '/bin/init.exp')
           , DB_CREDS
-          );
-
-        init.stdout.on('data', data => {
-          if( `${data}`.length > 1) {
-            console.log(`[bin/init.exp stdout]: ${data}`);
-          }
-        });
-
-        init.stderr.on('data', data => {
-          if( `${data}`.length > 1) {
-            console.log(`[bin/init.exp stderr]: ${data}`);
-          }
-        });
-
-        init.on('close', code => {
-          console.log(`Ran and existed with code ${code}`);
-          done();
-        });
-      });
-
-      after(function(done) {
-        let mysql = spawn
-          ( 'mysql'
-          , [ '-u root'
-            , '-e'
-            , ` drop database ${DB_CREDS[2]};\n
-                drop database ${DB_CREDS[2]}_testing;\n
-                drop database ${DB_CREDS[2]}_development;\n
-                drop user '${DB_CREDS[0]}'@'localhost';
-              `
-            ]
-          )
-
-        mysql.on('close', code => {
-          console.log('Closed with error code: ', code);
-          done();
-        })
-      });
-
-      it('Should work with credentials', function(done) {
-        let mysql = spawn
-          ( 'mysql'
-          , [ `-u ${DB_CREDS[0]}`
-            , `-p${DB_CREDS[1]}`
-            , `${DB_CREDS[2]}`
-            ]
-          )
-
-        mysql.stdout.on('data', data => {
-          if( `${data}`.length > 1) {
-            console.log(`[mysql sdtout]: ${data}`);
-          }
-        })
-
-        mysql.stderr.on('data', data => {
-          if( `${data}`.length > 1) {
-            console.log(`[mysql stderr]: ${data}`);
-          }
-        });
-
-        mysql.on('close', code => {
-          expect(code).toBe(0);
-          done();
-        });
+        );
+      init.stdout.on('data', function() {});
+      init.stderr.on('data', function() {});
+      init.on('close', function() {
+        done();
       });
     });
-  })
+
+    it('Should pass all application tests', function(done) {
+      this.timeout(100 * 1000);
+      let env = Object.create(process.env);
+      env.NODE_ENV = 'TESTING';
+      const tests = spawn
+        ( 'npm'
+          , [ 'test'
+          ]
+          , { env: env
+          }
+        );
+
+      tests.stderr.on('data', function(data) {
+        console.warn(`${data}`);
+      });
+      tests.on('close', function(code) {
+        expect(code).toBe(0);
+        done();
+      });
+    });
+  });
 });

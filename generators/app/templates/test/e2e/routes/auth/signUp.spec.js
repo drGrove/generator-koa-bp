@@ -33,8 +33,8 @@ describe('SignUp:', function() {
     });
 
     it('Should return JWT Token', function(done) {
-      process.env.USER_TOKEN = res.body.token;
-      expect(res.body.token).toBeA('string');
+      process.env.USER_TOKEN = res.body.data.token;
+      expect(res.body.data.token).toBeA('string');
       done();
     });
   });

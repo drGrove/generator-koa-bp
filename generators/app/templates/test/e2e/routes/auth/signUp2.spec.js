@@ -34,13 +34,13 @@ describe('SignUp:', function() {
 
     it('Should return JWT Token', function(done) {
       expect(res.body).toBeA('object');
-      expect(res.body.token.length).toBeGreaterThan(10);
-      process.env.USER_TOKEN = res.body.token;
+      expect(res.body.data.token.length).toBeGreaterThan(10);
+      process.env.USER_TOKEN = res.body.data.token;
       done();
     });
 
     it('Should set the web token as an environment variable', function(done) {
-      expect(process.env.USER_TOKEN).toBe(res.body.token);
+      expect(process.env.USER_TOKEN).toBe(res.body.data.token);
       done();
     });
   });

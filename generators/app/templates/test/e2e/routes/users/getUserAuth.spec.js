@@ -9,6 +9,11 @@ var config = require(process.env.PROJECT_ROOT + '/lib/config');
 describe('GET: AUTHORIZED: /users/me', function() {
   var res;
 
+  after( function(done) {
+    server.close();
+    done();
+  })
+
   before( function(done) {
     co( function*() {
       res = yield request
@@ -29,9 +34,9 @@ describe('GET: AUTHORIZED: /users/me', function() {
     done();
   });
 
-  it('Should set the body to an environment variable', function(done) {
-    process.env.USER_BODY = JSON.stringify(res.body);
-    expect(process.env.USER_BODY).toBe(JSON.stringify(res.body));
+  it('Should set the user id to an environment variable', function(done) {
+    process.env.USER_ID = res.body.data.id;
+    expect(parseInt(process.env.USER_ID)).toBe(parseInt(res.body.data.id));
     done();
   });
 });
