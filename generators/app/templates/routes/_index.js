@@ -16,124 +16,53 @@ var routes = function(app) {
     return this.body;
   });
 
-  /**
-   * Get list of directories
-   * @param {string} pathname The path to search
-   * @return {array} directories a list of directories
-   */
-  function getDirectories(pathname) {
-    return fs.readdirSync(pathname).filter( function(file) {
-      return fs.statSync(path.join(pathname, file)).isDirectory();
-    });
-  }
-
-  var directories = getDirectories(__dirname);
-
-  directories.forEach( function(dir) {
-    var paths = require('./' + dir)(app);
-    for (var method in paths) {
-      if (paths.hasOwnProperty(method)) {
-        for (var path in paths[method]) {
-          if (paths[method].hasOwnProperty(path)) {
-            var args = paths[method][path];
-            var uri = `${config.app.namespace}` + dir + path;
-            if (Array.isArray(args)) {
-              r[method.toLowerCase()](uri, compose(args));
-            } else {
-              r[method.toLowerCase()](uri, args);
+  function generateRoutes(files) {
+    files.map(function(file) {
+      if (file !== './routes/index.js') {
+        file = file.replace(/\/index.js|.\/routes\//g, '');
+        var paths = require(path.join(__dirname, file))(app);
+        for (let method in paths) {
+          if (paths.hasOwnProperty(method)) {
+            for (var p in paths[method]) {
+              if (paths[method].hasOwnProperty(p)) {
+                let args = paths[method][p];
+                let routeBreakdown = file.split('/');
+                let breakdownCount = routeBreakdown.length - 1;
+                let count = 0;
+                routeBreakdown = routeBreakdown.map(function(subpath) {
+                  if (count < breakdownCount) {
+                    subpath += ('/:' + subpath.replace(/s$/, 'Id'));
+                  }
+                  count++
+                  return subpath;
+                });
+                let sp = routeBreakdown.join('/');
+                let uri = '/' + sp + p;
+                if (Array.isArray(args)) {
+                  r[method.toLowerCase()](uri, compose(args));
+                } else {
+                  r[method.toLowerCase()](uri, args);
+                }
+              }
             }
           }
         }
       }
-    }
-  });
-  <% if (useSwagger) { -%>
-  /**
-   * Check is a path is a hidden path
-   * @param {string} path the path the check against
-   * @return {boolean} weather or not the path is a hidden path
-   */
-  var isUnixHiddenPath = function(path) {
-    return (/(^|\/)\.[^\/\.]/g).test(path);
-  };
+    });
+  }
 
-  /**
-   * Walk a directory and get a list of all files
-   * @param {string} dir the path of the dir to search
-   * @param {array} exclusions a list of file types to exclude
-   * @param {string} parent the parent path
-   * @return {array} list of associated files
-   */
-  var walk = function(dir, exclusions, parent) {
-    var results = [];
-    if (parent) {
-      dir = parent + '/' + dir;
-    }
-
-    var excludedFileTypes =
-    [ 'md'
-    , 'json'
-    , 'sql'
-    , 'log'
-    , 'env'
-    , 'production'
-    , 'development'
-    , 'testing'
-    , 'local'
-    ];
-
-    var files = fs.readdirSync(dir);
-    for (var idx in files) {
-      if (files.hasOwnProperty(idx)) {
-        var con = true;
-        var file = files[idx];
-        try {
-          if (isUnixHiddenPath(file)) {
-            throw new Error('hidden file');
-          }
-
-          var isExcluded = excludedFileTypes.indexOf(
-              file.split('.')[file.split.length - 1]
-            ) !== -1;
-
-          if (isExcluded) {
-            throw new Error('unsupported type');
-          }
-
-          if (exclusions.indexOf(dir + '/' + file) > -1) {
-            throw new Error('excluded file');
-          }
-        } catch (e) {
-          con = false;
-        }
-        if (exclusions.indexOf(dir) !== -1) {
-          con = false;
-        }
-        if (con) {
-          let f = fs.lstatSync(dir + '/' + file);
-          if (f.isDirectory()) {
-            results = results.concat(walk(file, exclusions, dir));
-          } else {
-            results.push(dir + '/' + file);
-          }
+  var directories = glob
+    ( './routes/**/**/index.js'
+    , function(er, files) {
+        if (!er) {
+          generateRoutes(files);
+        } else {
+          logger.error('Could not pull in files to generate routes.')
         }
       }
-    }
-    return results;
-  };
-
-  var specs = walk
-    ( app.rootDir
-    , [ app.rootDir + '/db'
-      , app.rootDir + '/node_modules'
-      , app.rootDir + '/public'
-      , app.rootDir + '/gulp'
-      , app.rootDir + '/gulpfile.js'
-      , app.rootDir + '/migrations'
-      , app.rootDir + '/tests'
-      , app.rootDir + '/LICENSE'
-      ]
     );
+
+  <% if (useSwagger) { -%>
   if (process.env.NODE_ENV !== "PRODUCTION") {
     var swaggerOptions =
     { swaggerDefinition:
@@ -149,7 +78,11 @@ var routes = function(app) {
       , host: config.app.domain + ':' + config.app.port
       , basePath: config.app.namespace
       }
-    , apis: specs // Path to the API docs
+    , apis:
+      [ app.rootDir + '/routes/**/*.js'
+      , app.rootDir + '/lib/**/*.js'
+      , app.rootDir + '/models/**/*.js'
+      ]
     };
 
     // Initialize swagger-jsdoc -> returns validated swagger spec in json format

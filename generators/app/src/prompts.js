@@ -19,10 +19,6 @@ module.exports = function(KoaBP) {
       name: 'appName',
       message: 'What is the name of your api?',
       default: this.appName || this.appname,
-      validate: function(input) {
-        this.appname = input;
-        return true;
-      }.bind(this),
       store: true
     }, {
       type: 'prompt',

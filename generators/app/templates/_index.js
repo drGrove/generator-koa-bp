@@ -23,7 +23,15 @@ app.rootDir = __dirname;
 app.use(responseTime());
 
 // Logger
-app.use(morgan.middleware('combined', {stream: logger.stream}));
+app.use(morgan.middleware('combined', {
+  stream: logger.stream,
+  skip: function() {
+    if (process.env.NODE_ENV === 'TESTING') {
+      return true;
+    }
+    return false;
+  }
+}));
 
 // CORS
 app.use(cors());
@@ -33,6 +41,17 @@ app.use(bodyParser());
 
 // Error Handler
 app.use(error());
+
+// Overload Response
+app.use(function*(next) {
+  yield next;
+  if(this.body) {
+    if (!this.body.error && !this.body.data) {
+      this.body = {data: this.body};
+    }
+  }
+  return this.body;
+});
 
 // 404 Handler
 app.use(function*(next) {

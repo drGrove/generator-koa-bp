@@ -34,8 +34,13 @@ describe('PUT: AUTHORIZED: /users/me', function() {
     done();
   });
 
+  it('Should have an object as a data response', function(done) {
+    expect(res.body.data).toBeA('object');
+    done();
+  });
+
   it(`Should have the firstname: ${body.firstname}`, function(done) {
-    expect(res.body.firstname).toBe(body.firstname);
+    expect(res.body.data.firstname).toBe(body.firstname);
     done();
   });
 });

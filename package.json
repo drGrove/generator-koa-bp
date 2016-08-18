@@ -27,6 +27,7 @@
     "babel-eslint": "^6.0.2",
     "eslint": "^2.1.0",
     "eslint-config-google": "^0.5.0",
+    "expect": "^1.20.2",
     "gulp": "^3.9.0",
     "gulp-coveralls": "^0.1.0",
     "gulp-eslint": "^2.0.0",
@@ -37,6 +38,7 @@
     "gulp-mocha": "^2.2",
     "gulp-nsp": "^2.1.0",
     "gulp-plumber": "^1.0.0",
+    "sequelize": "^3.24.0",
     "wrench": "^1.5.9",
     "yeoman-assert": "^2.0.0",
     "yeoman-test": "^1.0.0"
@@ -61,7 +63,8 @@
       "array-bracket-spacing": "off",
       "no-spaced-func": "off",
       "space-in-parens": "off",
-      "no-unexpected-multiline": "off"
+      "no-unexpected-multiline": "off",
+      "max-nested-callbacks": "off"
     }
   },
   "repository": "git@github.com:drGrove/generator-koa-bp",
