@@ -7,6 +7,7 @@ var routes = function(app) {
   var fs = require('fs');
   var swaggerJSDoc = require('swagger-jsdoc');
   var config = require(app.rootDir + '/lib/config');
+  var glob = require('glob');
 
   r.get('/', function*() {
     this.body =
