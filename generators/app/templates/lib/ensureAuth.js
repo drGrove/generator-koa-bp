@@ -38,7 +38,6 @@ function *ensureAuth(next) {
     this.body = genErr('NO_AUTH');
     return this.body;
   }
-
   var token = request.headers.authorization.split(' ')[1];
   var payload = null;
   try {
@@ -50,11 +49,14 @@ function *ensureAuth(next) {
     return this.body;
   }
 
-  var whitelist = yield Token.find({
-    userId: payload.sub
-  });
-
-  if (!whitelist) {
+  var whitelist;
+  try {
+    whitelist = yield Token.find({
+      userId: payload.sub,
+      token: token
+    });
+  } catch (e) {
+    logger.error('Error: ', e)
     this.status = 401;
     this.body = genErr('NO_AUTH');
     return this.body;
@@ -80,6 +82,11 @@ function *ensureAuth(next) {
               ]
             }
           ]
+        , attributes:
+          { exclude:
+            [ 'password'
+            ]
+          }
         }
       );
   } catch (e) {
@@ -90,16 +97,16 @@ function *ensureAuth(next) {
   }
 
   user = JSON.parse(JSON.stringify(user));
-  // Delete password from object
-  delete user.password;
-
   this.auth = user;
   try {
     var doesPass = yield checkRole.apply(this);
     if (doesPass === true) {
       // Convert 'Me' to the user id
-      if (this.params.id === 'me') {
-        this.params.id = this.auth.id;
+      if (this.params.userId === 'undefined') {
+        this.params.userId = this.auth.id;
+      }
+      if (this.params.userId === 'me') {
+        this.params.userId = this.auth.id;
       }
       yield next;
     } else {

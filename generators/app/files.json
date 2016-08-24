@@ -67,7 +67,8 @@
   "swagger": [
     ".bowerrc",
     "_bower.json",
-    "public/swagger/index.html"
+    "public/swagger/index.html",
+    "lib/swaggerDef.js"
   ],
   "mysqlFiles": [
     "bin/create_database.sh",

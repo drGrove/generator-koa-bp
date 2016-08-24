@@ -1,19 +1,21 @@
 'use strict';
 
+var path = require('path');
 var koa = require('koa');
 <% if (useSwagger) { -%>
 var swagger = require('swagger-koa');
+var swaggerDef = require(path.join(__dirname, 'lib/swaggerDef'))
 <% } -%>
 var bodyParser = require('koa-bodyparser');
 var morgan = require('koa-morgan');
 var responseTime = require('koa-response-time');
 var error = require('koa-error');
 var cors = require('koa-cors');
-var logger = require('./lib/logger');
-var config = require('./lib/config');
-var genErr = require('./lib/error');
-var sequelize = require('./lib/db').sequelize;
-var routes = require('./routes/index');
+var logger = require(path.join(__dirname, 'lib/logger'));
+var config = require(path.join(__dirname, 'lib/config'));
+var genErr = require(path.join(__dirname, 'lib/error'));
+var sequelize = require(path.join(__dirname, 'lib/db')).sequelize;
+var routes = require(path.join(__dirname, 'routes/index'));
 var r = require('koa-router')();
 var app = koa();
 
@@ -45,9 +47,11 @@ app.use(error());
 // Overload Response
 app.use(function*(next) {
   yield next;
-  if(this.body) {
-    if (!this.body.error && !this.body.data) {
-      this.body = {data: this.body};
+  if (/json/.test(this.type)) {
+    if(this.body) {
+      if (!this.body.error && !this.body.data) {
+        this.body = {data: this.body};
+      }
     }
   }
   return this.body;
@@ -84,20 +88,7 @@ app.use(function*(next) {
 <% if (useSwagger) { -%>
 // Swagger
 if (process.env.NODE_ENV !== 'PRODUCTION') {
-  app.use(swagger.init({
-    apiVersion: '1.0',
-    swaggerVersion: '2.0',
-    swaggerURL: `${config.app.namespace}swagger`,
-    swaggerJSON: `${config.app.namespace}docs.json`,
-    // swaggerUI: './public/swagger/',
-    swaggerUI: 'node_modules/swagger-ui/dist',
-    basePath: `http://${config.app.domain}:${config.app.port}`,
-    info: {
-      title: 'API',
-      description: 'Blah'
-    }
-  }));
-}
+  app.use(swagger.init({swaggerDef})
 <% } -%>
 
 // Sequelize Transactions

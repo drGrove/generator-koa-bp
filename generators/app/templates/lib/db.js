@@ -1,6 +1,6 @@
 'use strict';
 
-const NODE_ENV = process.env.NODE_ENV || 'DEVELOPMENT';
+const NODE_ENV = String(process.env.NODE_ENV).toUpperCase() || 'DEVELOPMENT';
 var configFile = String(NODE_ENV).toLowerCase();
 var path = require('path');
 var os = require('os');
