@@ -17,7 +17,7 @@ module.exports = function(app) {
       ]
     }
   , POST:
-    { '/':
+    { '':
       [ ensureAuth
       , create
       ]
