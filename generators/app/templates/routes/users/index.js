@@ -11,7 +11,7 @@ module.exports = function(app) {
       [ ensureAuth
       , all
       ]
-    , '/:id':
+    , '/:userId':
       [ ensureAuth
       , byId
       ]
@@ -23,13 +23,13 @@ module.exports = function(app) {
       ]
     }
   , PUT:
-    { '/:id':
+    { '/:userId':
       [ ensureAuth
       , update
       ]
     }
   , DELETE:
-    { '/:id':
+    { '/:userId':
       [ ensureAuth
       , remove
       ]
@@ -63,22 +63,11 @@ module.exports = function(app) {
   function *all() {
     var attributes = {};
 
-    if (this.auth) {
-      logger.log('Auth:', this.auth);
-    }
-
     try {
-      var users = JSON.parse(
-          JSON.stringify(
-            yield User
-              .findAll
-                ( attributes
-                )
-          )
-        );
-      for (var i = 0; i < users.length; i++) {
-        delete users[i].password;
-      }
+      var users = yield User
+        .findAll
+          ( attributes
+          );
       this.status = 200;
       this.body = users;
     } catch (e) {
@@ -124,9 +113,7 @@ module.exports = function(app) {
     body.level = 1;
     try {
       var res = yield User.create(body);
-      logger.log('Res: ', res);
       this.status = 201;
-      delete res.password;
       this.body = res;
     } catch (e) {
       this.status = 400;
@@ -165,7 +152,7 @@ module.exports = function(app) {
       yield me(this);
     } else {
       try {
-        var user = yield User.findById(this.params.id);
+        var user = yield User.findById(this.params.userId);
         this.body = user;
       } catch (e) {
         switch (e.name) {
