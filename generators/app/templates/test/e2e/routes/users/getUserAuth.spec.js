@@ -34,6 +34,11 @@ describe('GET: AUTHORIZED: /users/me', function() {
     done();
   });
 
+  it('Should not return a password', function() {
+    let userData = res.body.data;
+    expect(userData.password).toNotExist();
+  })
+
   it('Should set the user id to an environment variable', function(done) {
     process.env.USER_ID = res.body.data.id;
     expect(parseInt(process.env.USER_ID)).toBe(parseInt(res.body.data.id));

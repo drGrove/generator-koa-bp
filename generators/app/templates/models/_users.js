@@ -237,6 +237,35 @@ module.exports = function(sequelize, DataTypes) {
             );
         }
       }
+    , hooks:
+      { beforeFind: function(options) {
+          options = options || {};
+          options.attributes = options.attributes || {};
+          if (options.attributes.exclude) {
+            let exclude =
+              [ 'password'
+              <%_ if (includeOAuthProviders) { _%>
+              , 'google'
+              , 'facebook'
+              , 'github'
+              , 'linkedin'
+              <%_ } _%>
+              ]
+            options.attributes.exclude = [...new Set([...options.attributes.exclude, ...exclude])]
+          } else {
+            options.attributes.exclude =
+              [ 'password'
+              <%_ if (includeOAuthProviders) { _%>
+              , 'google'
+              , 'facebook'
+              , 'github'
+              , 'linkedin'
+              <%_ } _%>
+              ]
+          }
+          return options;
+        }
+      }
     }
   );
 

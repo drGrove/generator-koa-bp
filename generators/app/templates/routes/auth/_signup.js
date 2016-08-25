@@ -68,12 +68,12 @@ module.exports = function(app) {
 
       user = yield User.findOne({
         where:
-        { email: this.request.body.email
-        },
-        include:
-        [ { model: Role
+          { email: this.request.body.email
           }
-        ]
+      , include:
+          [ { model: Role
+            }
+          ]
       });
 
       role = yield Role.findById(3);
@@ -87,8 +87,6 @@ module.exports = function(app) {
         throw new Error('Association not created');
       }
 
-      user = JSON.parse(JSON.stringify(user));
-      delete user.password;
       var token = utilities.genToken(user);
       var refresh = utilities.genRefresh();
 

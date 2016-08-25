@@ -9,7 +9,7 @@ var routes = function(app) {
   var config = require(app.rootDir + '/lib/config');
   var glob = require('glob');
 
-  r.get('/', function*() {
+  r.get('', function*() {
     this.body =
       { active: true
       , timestamp: new Date().getTime()
@@ -38,7 +38,7 @@ var routes = function(app) {
                   return subpath;
                 });
                 let sp = routeBreakdown.join('/');
-                let uri = '/' + sp + p;
+                let uri = `${sp}${p}`
                 if (Array.isArray(args)) {
                   r[method.toLowerCase()](uri, compose(args));
                 } else {
@@ -63,28 +63,28 @@ var routes = function(app) {
       }
     );
 
-  <% if (useSwagger) { -%>
+  <%_ if (useSwagger) { _%>
   if (process.env.NODE_ENV !== "PRODUCTION") {
     var swaggerOptions =
-    { swaggerDefinition:
-      { swagger: '2.0'
-      , info:
-        { title: 'API Explorer' // Title (required)
-        , version: '1.0.0' // Version (required)
-        , contact:
-          { name: ''
-          , url: ''
+      { swaggerDefinition:
+          { swagger: '2.0'
+          , info:
+              { title: 'API Explorer' // Title (required)
+              , version: '1.0.0' // Version (required)
+              , contact:
+                  { name: ''
+                  , url: ''
+                  }
+              }
+          , host: `${config.app.domain || config.app.host}:${config.app.port}`
+          , basePath: config.app.namespace
           }
-        }
-      , host: config.app.domain + ':' + config.app.port
-      , basePath: config.app.namespace
-      }
-    , apis:
-      [ app.rootDir + '/routes/**/*.js'
-      , app.rootDir + '/lib/**/*.js'
-      , app.rootDir + '/models/**/*.js'
-      ]
-    };
+      , apis:
+          [ app.rootDir + '/routes/**/*.js'
+          , app.rootDir + '/lib/**/*.js'
+          , app.rootDir + '/models/**/*.js'
+          ]
+      };
 
     // Initialize swagger-jsdoc -> returns validated swagger spec in json format
     var swaggerSpec = swaggerJSDoc(swaggerOptions);
@@ -93,7 +93,7 @@ var routes = function(app) {
       this.body = swaggerSpec;
     });
   }
-  <% } -%>
+  <%_ } _%>
   return r;
 };
 
