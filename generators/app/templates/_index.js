@@ -85,11 +85,12 @@ app.use(function*(next) {
   }
   return this.body;
 });
-<% if (useSwagger) { -%>
+<% if (useSwagger) { %>
 // Swagger
 if (process.env.NODE_ENV !== 'PRODUCTION') {
-  app.use(swagger.init({swaggerDef})
-<% } -%>
+  app.use(swagger.init(swaggerDef));
+}
+<% } %>
 
 // Sequelize Transactions
 app.use(require('koa-sequelize-transaction')({

@@ -15,6 +15,9 @@ describe('Make app with named application', function() {
       .then(function(dir) {
         tempDir = dir;
         done();
+      })
+      .catch(function(err) {
+        console.error('ERROR: ', err);
       });
   });
 
