@@ -1,8 +1,9 @@
 'use strict';
 module.exports = function(app) {
-  var ensureAuth = require(app.rootDir + '/lib/ensureAuth');
-  var logger = require(app.rootDir + '/lib/logger');
-  var User = require(app.rootDir + '/models').User;
+  var path = require('path');
+  var ensureAuth = require(path.join(app.rootDir, '/lib/ensureAuth'));
+  var logger = require(path.join(app.rootDir, '/lib/logger'));
+  var User = require(path.join(app.rootDir, '/models')).User;
 
   var routeConfig =
   { GET:
@@ -141,12 +142,12 @@ module.exports = function(app) {
    * List a user by id
    * @return {object} body
    * @swagger
-   * /users/{id}:
+   * /users/{userId}:
    *   get:
    *     operationId: listUserByIdV1
    *     summary: List User by id
    *     parameters:
-   *       - name: id
+   *       - name: userId
    *         in: path
    *         type: integer
    *         required: true
@@ -160,18 +161,11 @@ module.exports = function(app) {
    *           $ref: '#/definitions/User'
    */
   function *byId() {
-    if (this.params.id === 'me') {
+    if (this.params.userId === 'me') {
       yield me(this);
     } else {
       try {
-        var user = JSON.parse(
-            JSON.stringify(
-              yield User.findById(
-                this.params.id
-              )
-            )
-          );
-        delete user.password;
+        var user = yield User.findById(this.params.id);
         this.body = user;
       } catch (e) {
         switch (e.name) {
@@ -194,7 +188,7 @@ module.exports = function(app) {
    * Update a user by id
    * @return {object} body
    * @swagger
-   * /users/{id}:
+   * /users/{userId}:
    *   put:
    *     operationId: updateUserV1
    *     summary: Update user by id
@@ -203,7 +197,7 @@ module.exports = function(app) {
    *     security:
    *       - Authorization: []
    *     parameters:
-   *       - name: id
+   *       - name: userId
    *         in: path
    *         type: integer
    *         required: true
@@ -217,10 +211,10 @@ module.exports = function(app) {
   function *update() {
     var body = this.request.body;
     try {
-      var user = yield User.findById(this.params.id);
+      var user = yield User.findById(this.params.userId);
       if (!user) {
         user = yield User.find({
-          where: {id: this.params.id},
+          where: {id: this.params.userId},
           paranoid: false
         });
       }
@@ -233,8 +227,6 @@ module.exports = function(app) {
         yield user.restore();
       }
       yield user.save();
-      user = JSON.parse(JSON.stringify(user));
-      delete user.password;
       this.body = user;
     } catch (e) {
       logger.error('Error: ', e.stack);
@@ -251,14 +243,14 @@ module.exports = function(app) {
    * Delete a user by id
    * @return {object} body
    * @swagger
-   * /users/{id}:
+   * /users/{userId}:
    *   delete:
    *     operationId: deleteUserV1
    *     summary: Remove User by id
    *     tags:
    *       - Users
    *     parameters:
-   *       - name: id
+   *       - name: userId
    *         type: integer
    *         in: path
    *         required: true
@@ -271,8 +263,7 @@ module.exports = function(app) {
    */
   function *remove() {
     try {
-      var user = yield User.findById(this.params.id);
-      logger.log('User: ', user);
+      var user = yield User.findById(this.params.userId);
 
       if (!user) {
         this.status = 404;
@@ -285,7 +276,7 @@ module.exports = function(app) {
       yield User
         .destroy
         ( { where:
-            { id: this.params.id
+            { id: this.params.userId
             }
           }
         );
@@ -324,14 +315,8 @@ module.exports = function(app) {
    *          $ref: '#/definitions/GeneralError'
    */
   function *me(that) {
-    var user = JSON.parse(
-      JSON.stringify(
-        yield User.findById(that.auth.id)
-      )
-    );
-
-    delete user.password;
-    that.body = user;
-    return that;
+    var user = yield User.findById(that.auth.id);
+    this.body = user;
+    return this.body;
   }
 };
