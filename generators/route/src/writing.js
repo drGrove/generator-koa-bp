@@ -19,21 +19,16 @@ module.exports = function(KoaBP) {
     for (var idx in this.files) {
       if (this.files.hasOwnProperty(idx)) {
         var file = this.files[idx];
-        try {
-          if (file.template) {
-            this.fs.copyTpl(
-              this.templatePath(file.src),
-              this.destinationPath(file.dest),
-              props);
-          } else {
-            this.fs.copy(
-              this.templatePath(file.src),
-              this.destinationPath(file.dest),
-              props);
-          }
-        } catch (error) {
-          console.error('Template processing error on file', file.src);
-          throw error;
+        if (file.template) {
+          this.fs.copyTpl(
+            this.templatePath(file.src),
+            this.destinationPath(file.dest),
+            props);
+        } else {
+          this.fs.copy(
+            this.templatePath(file.src),
+            this.destinationPath(file.dest),
+            props);
         }
       }
     }

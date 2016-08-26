@@ -9,9 +9,7 @@ var chalk = require('chalk');
 module.exports = function(KoaBP) {
   KoaBP.prototype.info = function() {
     this.log(yosay(
-      'Welcome to the opinionated koa api ' +
-      chalk.red('generator-koa-bp') +
-      ' generator!'
+      'Add a new route? '
     ));
   };
 };
