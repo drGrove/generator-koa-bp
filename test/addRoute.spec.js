@@ -3,7 +3,6 @@ var path = require('path');
 var spawn = require('child_process').spawn;
 var assert = require('yeoman-assert');
 var helpers = require('yeoman-test');
-var assets = require('./assets.json');
 
 describe('Make a new custom route', function() {
   var tempDir;
@@ -35,6 +34,6 @@ describe('Make a new custom route', function() {
   });
 
   it('Should create the route folder', function() {
-    assets.file('routes/users/tests/index.js');
+    assert.file('routes/users/tests/index.js');
   });
-})
+});

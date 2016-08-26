@@ -13,7 +13,6 @@ var KoaBPRoute = yeoman.Base.extend({
   }
 });
 
-//require('./src/info')(KoaBP);
 require('./src/files')(KoaBPRoute);
 require('./src/prompts')(KoaBPRoute);
 require('./src/writing')(KoaBPRoute);
