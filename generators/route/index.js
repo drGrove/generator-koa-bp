@@ -6,23 +6,19 @@ var utils = require('./utils');
  * Creates a new Generator
  * @constructor
  */
-var KoaBP = yeoman.Base.extend({
+var KoaBPRoute = yeoman.Base.extend({
   constructor: function() {
     yeoman.Base.apply(this, arguments);
     this.utils = utils;
-    this.argument('appName', {
-      type: String,
-      required: false
-    });
   }
 });
 
-require('./src/info')(KoaBP);
-require('./src/files')(KoaBP);
-require('./src/prompts')(KoaBP);
-require('./src/writing')(KoaBP);
+//require('./src/info')(KoaBP);
+require('./src/files')(KoaBPRoute);
+require('./src/prompts')(KoaBPRoute);
+require('./src/writing')(KoaBPRoute);
 
 /**
  * @export
  */
-module.exports = KoaBP;
+module.exports = KoaBPRoute;

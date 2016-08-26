@@ -3,25 +3,32 @@ module.exports = function(app) {
   var genError = require(app.rootDir + '/lib/error');
   var ensureAuth = require(app.rootDir + '/lib/ensureAuth');
   var logger = require(app.rootDir + '/lib/logger');
-  var Route = require(app.rootDir + '/models').Route;
-  var Role = require(app.rootDir + '/models').Role;
 
   var routeConfig =
   { POST:
-    { '/': create
+    { '':
+      [ ensureAuth
+      , create
+      ]
     }
   , GET:
-    { '/': all
-    , '/:id': byId
+    { '':
+      [ ensureAuth
+      , all
+      ]
+    , '/:<%= params[params.length - 1] %>':
+      [ ensureAuth
+      , byId
+      ]
     }
   , PUT:
-    { '/:id':
+    { '/:<%= params[params.length - 1] %>':
       [ ensureAuth
       , update
       ]
     }
   , DELETE:
-    { '/:id':
+    { '/:<%= params[params.length - 1] %>':
       [ ensureAuth
       , remove
       ]
@@ -33,63 +40,30 @@ module.exports = function(app) {
   /**
    * Create a route reference
    * @return {object} body
+   */
+  /**
    * @swagger
-   * /routes:
+   * <%= pathWithAllButLastParam %>:
    *  post:
-   *    operationId: ID
+   *    operationId: OP_ID
    *    summary: MESSAGE
    *    produces:
    *      - application/json
    *    tags:
-   *      - Routes
+   *      - TAG
    *    responses:
    *      200:
    *        description: Success
    *        schema:
    *          type: object
-   *          $ref: '#/definitions/newRoute'
+   *          $ref: '#/definitions/MODEL'
    */
   function *create() {
     var body = this.request.body;
     try {
-      var routeBody =
-        { url: body.url
-        , method: body.method
-        };
-      delete body.url;
-      delete body.method;
-      var route;
-      try {
-        route = yield Route.create(routeBody);
-      } catch (e) {
-        logger.error('Error: ', e);
-        route = yield Route.findOne({
-          where: routeBody,
-          include: [Role]
-        });
-      }
-      var role = yield Role.findById(body.role);
-      yield role.addRoute(route);
-      this.status = 201;
-      this.body = route;
+
     } catch (e) {
-      logger.error('Error: ', e);
-      switch (e.name) {
-        case 'SequelizeUniqueConstraintError': {
-          logger.error('Error: ', e);
-          this.status = 400;
-          this.body =
-            { error: true
-            , msg: e.errors || e.message
-            , errNo: 420
-            , errCode: 'UniqueConstraint'
-            };
-          break;
-        }
-        default: {
-          // do nothing
-        }
-      }
+
     }
     return this.body;
   }
@@ -97,27 +71,26 @@ module.exports = function(app) {
   /**
    * Get a route by reference
    * @return {object} body
+   */
+  /**
    * @swagger
-   * /routes:
+   * <%= pathWithAllButLastParam %>:
    *   get:
-   *     operationId: getRoutesReferenceV1
+   *     operationId: OP_ID
    *     summary: Returns list of routes with roles
    *     produces:
    *       - application/json
-   *     tags:
-   *       - Routes
    *     responses:
    *       200:
-   *         description: Array of Routes
+   *         description: Array of <% className %>
    *         schema:
    *          type: array
    *          items:
-   *            $ref: '#/definitions/route'
+   *            $ref: '#/definitions/MODEL'
    */
   function *all() {
     try {
-      var res = yield Route.findAll({});
-      this.body = res;
+
     } catch (e) {
       this.status = 500;
       this.body =
@@ -132,10 +105,27 @@ module.exports = function(app) {
    * Get a route by id
    * @return {object} body
    */
+  /**
+   *  @swagger
+   *  <%= pathWithAllParams %>:
+   *    get:
+   *      operationId: OP_ID
+   *      summary: SUMMARY
+   *      parameters:
+<%_ for (var i = 0; i < params.length; i++) { _%>
+   *        - name: <%= params[i] %>
+   *          in: path
+   *          type: integer
+   *          required: true
+   *          description: ID of <%= route.split('/')[i].replace(/s$/, ''); %>
+<%_ } _%>
+   */
   function *byId() {
-    var id = this.params.id;
+    <% for (var i = 0; i < params.length; i++) { %>
+    var <%= params[i] %> = this.params.<%= params[i] %>;
+    <% } %>
     try {
-      this.body = yield Route.findById(id);
+
     } catch (e) {
       this.status = 404;
       this.body =
@@ -147,21 +137,32 @@ module.exports = function(app) {
   }
 
   /**
-   * Update a route by id
+   * Update a <% className %> by id
    * @return {object} body
    */
+  /**
+   *  @swagger
+   *  <%= pathWithAllParams %>:
+   *    put:
+   *      operationId: OP_ID
+   *      summary: SUMMARY
+   *      parameters:
+<%_ for (var i = 0; i < params.length; i++) { _%>
+   *        - name: <%= params[i] %>
+   *          in: path
+   *          type: integer
+   *          required: true
+   *          description: ID of <%= route.split('/')[i].replace(/s$/, ''); %>
+<%_ } _%>
+   */
+
   function *update() {
-    var id = this.params.id;
+    <% for (var i = 0; i < params.length; i++) { %>
+    var <%= params[i] %> = this.params.<%= params[i] %>;
+    <% } %>
     var body = this.request.body;
     try {
-      var route = yield Route.findById(id);
-      for (var key in body) {
-        if (route.hasOwnProperty(key)) {
-          route[key] = body[key];
-        }
-      }
-      yield route.save();
-      this.body = route;
+
     } catch (e) {
       this.status = 400;
       this.body =
@@ -175,14 +176,31 @@ module.exports = function(app) {
   }
 
   /**
-   * Delete a route by id
+   * Delete <% className %> by id
    * @return {object} body
    */
+  /**
+   *  @swagger
+   *  <%= pathWithAllParams %>:
+   *    delete:
+   *      operationId: OP_ID
+   *      summary: SUMMARY
+   *      parameters:
+<%_ for (var i = 0; i < params.length; i++) { _%>
+   *        - name: <%= params[i] %>
+   *          in: path
+   *          type: integer
+   *          required: true
+   *          description: ID of <%= route.split('/')[i].replace(/s$/, ''); %>
+<%_ } _%>
+   */
+
   function *remove() {
-    var id = this.params.id;
+    <% for (var i = 0; i < params.length; i++) { %>
+    var <%= params[i] %> = this.params.<%= params[i] %>;
+    <% } %>
     try {
-      var route = yield Route.findById(id);
-      yield route.destroy();
+
       this.status = 204;
       this.body = genError('NO_CONTENT');
     } catch (e) {

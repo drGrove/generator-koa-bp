@@ -3,11 +3,11 @@ var yosay = require('yosay');
 var chalk = require('chalk');
 
 /**
- * @param {!yeoman.Generator} KoaBP generator
+ * @param {!yeoman.Generator} KoaBPRoute generator
  * @export
  */
-module.exports = function(KoaBP) {
-  KoaBP.prototype.info = function() {
+module.exports = function(KoaBPRoute) {
+  KoaBPRoute.prototype.info = function() {
     this.log(yosay(
       'Add a new route? '
     ));

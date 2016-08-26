@@ -9,9 +9,9 @@
     "url": "https://dannygrove.com"
   },
   "files": [
-    "generators"
+    "generators/app",
+    "generators/route"
   ],
-  "main": "generators/index.js",
   "keywords": [
     "koa",
     "api",

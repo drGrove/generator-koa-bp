@@ -2,5 +2,6 @@
 
 module.exports = {
   walk: require('./walk'),
-  replacePrefix: require('./replacePrefix')
+  replacePrefix: require('./replacePrefix'),
+	toProperCase: require('./toProperCase')
 };
