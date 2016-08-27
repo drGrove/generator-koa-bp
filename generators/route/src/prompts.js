@@ -10,11 +10,10 @@ module.exports = function(KoaBPRoute) {
    * @function
    */
   KoaBPRoute.prototype.prompting = function() {
-    var utils = this.utils;
-    var uname = process.env.USER;
-    var done = this.async();
+    const utils = this.utils;
+    let done = this.async();
 
-    var prompts =
+    let prompts =
       [ { type: 'prompt'
         , name: 'route'
         , message: 'What is the endpoint (ie. users/attachments)?'
@@ -22,23 +21,24 @@ module.exports = function(KoaBPRoute) {
       ];
 
     this.prompt(prompts, function(props) {
-      var _path = "";
+      let _path = "";
       this.props = props;
-      this.props.params = []
+      this.props.params = [];
       this.props.className = [];
       this.props.route.split('/').forEach(function(param) {
-        var _param = param;
-        var name = utils.toProperCase(param);
+        let _param = param;
+        let name = utils.toProperCase(param);
         param = param.replace(/s$/, 'Id');
-        _path += `/${_param}/:${param}`
+        _path += `/${_param}/:${param}`;
         this.props.params.push(param);
         this.props.className.push(name);
       }.bind(this));
       this.props.className = this.props.className.join('.');
       this.props.pathWithAllParams = _path;
-      this.props.pathWithAllButLastParam = _path.split('/')
-      this.props.pathWithAllButLastParam.pop()
-      this.props.pathWithAllButLastParam = this.props.pathWithAllButLastParam.join('/')
+      this.props.pathWithAllButLastParam = _path.split('/');
+      this.props.pathWithAllButLastParam.pop();
+      let fullPath = this.props.pathWithAllButLastParam.join('/');
+      this.props.pathWithAllButLastParam = fullPath;
       done();
     }.bind(this));
   };

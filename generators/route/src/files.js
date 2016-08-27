@@ -6,6 +6,7 @@ var files = require('../files.json');
  * Takes a template file path and creates a copy description object
  * Adds an _ to the file's basename if it's a template
  * @param {array} files is a template file
+ * @param {object} props prompt properties
  * @return {function} function that takes in the file from a stream
  */
 function resolvePaths(files, props) {
