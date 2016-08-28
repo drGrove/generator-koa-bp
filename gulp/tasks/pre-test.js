@@ -1,16 +1,17 @@
 'use strict';
 var gulp = require('gulp');
 var config = require('../config');
-var plugins = require('../plugins');
+var excludeGitignore = require('gulp-exclude-gitignore');
+var istanbul = require('gulp-istanbul');
 
 gulp.task('pre-test', function() {
   return gulp.src([
     config.Paths.GENERATORS,
     config.Paths.IGNORE_GENERATOR_TEMPLATES
   ])
-  .pipe(plugins.excludeGitignore())
-  .pipe(plugins.istanbul({
+  .pipe(excludeGitignore())
+  .pipe(istanbul({
     includeUntested: true
   }))
-  .pipe(plugins.istanbul.hookRequire());
+  .pipe(istanbul.hookRequire());
 });

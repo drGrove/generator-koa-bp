@@ -2,19 +2,21 @@
 
 var gulp = require('gulp');
 var config = require('../config');
-var plugins = require('../plugins');
+var plumber = require('gulp-plumber');
+var mocha = require('gulp-mocha');
+var istanbul = require('gulp-istanbul');
 
 gulp.task('test', ['pre-test'], function(cb) {
   var mochaErr;
 
   gulp.src(config.Paths.TESTS)
-    .pipe(plugins.plumber())
-    .pipe(plugins.mocha({reporter: 'spec'}))
+    .pipe(plumber())
+    .pipe(mocha({reporter: 'spec'}))
     .on('error', function(err) {
       console.log('mocha error: ', err);
       mochaErr = err;
     })
-    .pipe(plugins.istanbul.writeReports({
+    .pipe(istanbul.writeReports({
       dir: config.Paths.COVERAGE,
       reportors: [
         'lcovonly',

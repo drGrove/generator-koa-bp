@@ -1,0 +1,24 @@
+{
+  "extends": "google",
+  "parserOptions": {
+    "ecmaVersion": 6
+  },
+  "parser": "babel-eslint",
+  "env": {
+    "mocha": true,
+    "node": true,
+    "es6": true
+  },
+  "rules": {
+    "strict": 0,
+    "object-curly-spacing": "off",
+    "comma-style": "off",
+    "camelcase": "off",
+    "generator-star-spacing": "off",
+    "array-bracket-spacing": "off",
+    "no-spaced-func": "off",
+    "space-in-parens": "off",
+    "no-unexpected-multiline": "off",
+    "max-nested-callbacks": "off"
+  }
+}

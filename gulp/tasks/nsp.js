@@ -1,8 +1,8 @@
 'use strict';
-var gulp = require('gulp');
-var path = require('path');
-var plugins = require('../plugins');
+const gulp = require('gulp');
+const path = require('path');
+const nsp = require('gulp-nsp');
 
 gulp.task('nsp', function(cb) {
-  plugins.nsp({package: path.resolve('package.json'), stopOnError: true}, cb);
+  nsp({package: path.resolve('package.json'), stopOnError: true}, cb);
 });

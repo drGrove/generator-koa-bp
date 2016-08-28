@@ -1,15 +1,18 @@
 'use strict';
 var gulp = require('gulp');
 var config = require('../config');
-var plugins = require('../plugins');
+var excludeGitignore = require('gulp-exclude-gitignore');
+var eslint = require('gulp-eslint');
 
 gulp.task('static', function() {
   return gulp.src([
     config.Paths.ALL_JS,
     config.Paths.IGNORE_GENERATOR_TEMPLATES
   ])
-  .pipe(plugins.excludeGitignore())
-  .pipe(plugins.eslint())
-  .pipe(plugins.eslint.format())
-  .pipe(plugins.eslint.failAfterError());
+  .pipe(excludeGitignore())
+  .pipe(eslint({
+    debug: true
+  }))
+  .pipe(eslint.format())
+  .pipe(eslint.failAfterError());
 });
