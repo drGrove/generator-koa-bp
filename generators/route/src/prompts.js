@@ -10,7 +10,7 @@ module.exports = function(KoaBPRoute) {
    * @function
    */
   KoaBPRoute.prototype.prompting = function() {
-    const utils = this.utils;
+    let utils = this.utils;
     let done = this.async();
 
     let prompts =
