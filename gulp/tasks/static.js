@@ -10,9 +10,7 @@ gulp.task('static', function() {
     config.Paths.IGNORE_GENERATOR_TEMPLATES
   ])
   .pipe(excludeGitignore())
-  .pipe(eslint({
-    debug: true
-  }))
+  .pipe(eslint())
   .pipe(eslint.format())
   .pipe(eslint.failAfterError());
 });
