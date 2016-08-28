@@ -1,7 +1,7 @@
 'use strict';
 var gulp = require('gulp');
 var path = require('path');
-var plugins = require('../plugins');
+var coveralls = require('gulp-coveralls');
 
 gulp.task('coveralls', ['test'], function() {
   if (!process.env.CI) {
@@ -9,6 +9,6 @@ gulp.task('coveralls', ['test'], function() {
   }
 
   return gulp.src(path.join(__dirname, 'coverage/lcov.info'))
-    .pipe(plugins.coveralls());
+    .pipe(coveralls());
 });
 

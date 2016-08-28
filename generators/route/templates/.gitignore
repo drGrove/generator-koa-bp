@@ -1,0 +1,9 @@
+node_modules
+bower_components
+*.sw*
+*.log
+db/data
+*.env
+config.json
+logs/**
+migrations/*.json

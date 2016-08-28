@@ -1,6 +1,7 @@
 'use strict';
 var fs = require('fs');
 var gulp = require('gulp');
+var runSequence = require('run-sequence');
 
 fs.readdirSync('./gulp/tasks').filter(function(file) {
   return (/\.(js|coffee)$/i).test(file);
@@ -9,4 +10,8 @@ fs.readdirSync('./gulp/tasks').filter(function(file) {
 });
 
 gulp.task('prepublish', ['nsp']);
-gulp.task('default', ['static', 'test', 'coveralls']);
+gulp.task('default', runSequence(
+  'static',
+  'test',
+  'coveralls'
+));
