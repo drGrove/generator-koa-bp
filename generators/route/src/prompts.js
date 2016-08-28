@@ -21,6 +21,7 @@ module.exports = function(KoaBPRoute) {
       ];
 
     this.prompt(prompts, function(props) {
+      let self = this;
       let _path = "";
       this.props = props;
       this.props.params = [];
@@ -29,7 +30,7 @@ module.exports = function(KoaBPRoute) {
         let _param = param;
         let name = utils.toProperCase(param);
         param = param.replace(/s$/, 'Id');
-        _path += `/${_param}/:${param}`;
+        _path += `/${_param}/{${param}}`;
         this.props.params.push(param);
         this.props.className.push(name);
       }.bind(this));
@@ -39,6 +40,16 @@ module.exports = function(KoaBPRoute) {
       this.props.pathWithAllButLastParam.pop();
       let fullPath = this.props.pathWithAllButLastParam.join('/');
       this.props.pathWithAllButLastParam = fullPath;
+
+      var pathParts = this.props.route.split('/');
+      self.log.info('Path parts: ', pathParts);
+      for (var i = 0; i < pathParts; i++) {
+        self.log.info(`Path part: ${pathParts[i]}`)
+        if (!/s$/.test(pathParts[i])) {
+          self.log.error('All parts of the path must be plural.');
+          process.exit(1);
+        }
+      }
       done();
     }.bind(this));
   };
