@@ -38,7 +38,8 @@ module.exports = function(app) {
   return routeConfig;
 
   /**
-   * Create a route reference
+   * Create a <%= className %> reference
+   * @name <%= className %>#create
    * @return {object} body
    */
   /**
@@ -69,7 +70,8 @@ module.exports = function(app) {
   }
 
   /**
-   * Get a route by reference
+   * Get a list of <%= className %>
+   * @name <%= className %>#all
    * @return {object} body
    */
   /**
@@ -102,7 +104,8 @@ module.exports = function(app) {
   }
 
   /**
-   * Get a route by id
+   * Get a <%= className %> by id
+   * @name <%= className %>#byId
    * @return {object} body
    */
   /**
@@ -137,7 +140,8 @@ module.exports = function(app) {
   }
 
   /**
-   * Update a <% className %> by id
+   * Update a <%= className %> by id
+   * @name <%= className %>#update
    * @return {object} body
    */
   /**
@@ -176,7 +180,8 @@ module.exports = function(app) {
   }
 
   /**
-   * Delete <% className %> by id
+   * Delete <%= className %> by id
+   * @name <%= className %>#remove
    * @return {object} body
    */
   /**
