@@ -21,7 +21,9 @@ gulp.task('smokeTest', ['lint'], function() {
 
   var options = minimist(process.argv.slice(2), {})
 
-  process.env.MOCHA_SUITES = options.suites ? options.suites : 'all'
+  if (!process.env.MOCHA_SUITES) {
+    process.env.MOCHA_SUITES = options.suites ? options.suites : 'all'
+  }
 
   gulp
     .src(config.PATHS.SUITE_RUNNER)
