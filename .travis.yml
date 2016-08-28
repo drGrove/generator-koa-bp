@@ -1,10 +1,13 @@
 language: node_js
 node_js:
-  - v6
-  - v5
-  - v4
+- v6
+- v5
+- v4
 addons:
   mariadb: '10.1'
   apt:
     packages:
-      - expect
+    - expect
+env:
+  global:
+    secure: Fdo2JmN3/+xoKnXcvoza/XEdinL71oy/s9QzjOxbg0D8o7/B0TccM0z572r59cWioT2uvVxncT7qig5kOB+6rqbjyQqMXKjG5CJl7Ka1vzHwTo7hxwgMaNCy0HBrA+88qwSRWPmT0RR5tgKVxCIqneyWey/qZSE61VpnmdDXnOhz2LCn7tmvlECAQEixVAfo89bRJUnZaiMh50Wxt4dtK7mxekfSujx0W/j+zM3jxZNer7fbxKED/H6WSiQF0UIGufMtXOtz4dobR/Fbs7cfZ6/Y0mY56nwscnLIEiNhpLI+9bWXZbR+UIfeosUIyKm9NiFy9VnkngMHOGMaN0CVuRU6H75kN4feG2uatKMcsQkawH7qmJjB3eWCiWbT45MiGMXKdRhfxH5vpLoYSN6y1yNw+k7JeBL7m1uSpe2El8hj8gKkqKcl8C980tAvxWf+DyugelEUKGXE2QJDHwnddKN9yGCO18stOtBd0pnMjWmxTm2s7u1kRmAp1VAV8z1a4y+oP97y9zghqV+3Y98yPJj/Zsl1gttheapApcVVgDWCGESTvs3omhITkkrQRGhR7qGOcswBv2MVOW2eZKXxi82KDYOvpL0oyQEy3JAfoWP4VMLHb21bquhAo0SgpjnWaCGRIiOiN2bAsCD17+JjdpVCzGG9ZwYUFOPV6iqaGEo=
