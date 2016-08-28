@@ -16,11 +16,9 @@ module.exports = function(KoaBPRoute) {
         props[key] = this.props[key];
       }
     }
-    console.log('FILES: ', this.files);
     for (var idx in this.files) {
       if (this.files.hasOwnProperty(idx)) {
         var file = this.files[idx];
-        console.log('FILE: ', file);
         if (file.template) {
           this.fs.copyTpl(
             this.templatePath(file.src),
