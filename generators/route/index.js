@@ -10,6 +10,10 @@ var KoaBPRoute = yeoman.Base.extend({
   constructor: function() {
     yeoman.Base.apply(this, arguments);
     this.utils = utils;
+    this.argument('route', {
+      type: String,
+      required: false
+    });
   }
 });
 

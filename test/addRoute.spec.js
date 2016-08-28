@@ -33,7 +33,7 @@ describe('Make a new custom route', function() {
     });
   });
 
-  it('Should create the route folder', function() {
+  it('creates the route folder', function() {
     assert.file('routes/users/tests/index.js');
   });
 });
