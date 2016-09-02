@@ -98,7 +98,7 @@ app.use(require('koa-sequelize-transaction')({
 }));
 
 // Router
-r.use(config.app.namespace, routes(app).routes());
+r.use(routes(app).routes());
 app.use(r.routes());
 
 if (!module.parent) {
