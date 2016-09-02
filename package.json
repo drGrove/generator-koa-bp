@@ -41,7 +41,6 @@
     "mocha-lcov-reporter": "^1.2.0",
     "run-sequence": "^1.2.2",
     "sequelize": "^3.24.0",
-    "wrench": "^1.5.9",
     "yeoman-assert": "^2.0.0",
     "yeoman-test": "^1.0.0"
   },
