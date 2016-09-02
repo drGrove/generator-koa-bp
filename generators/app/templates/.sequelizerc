@@ -20,6 +20,8 @@ try {
   cfg.password = process.env.DATABASE_PASS
   cfg.host = process.env.DATABASE_HOST || 'localhost'
   cfg.dialect = process.env.DATABASE_DIALECT || 'mysql'
+  // Store completed seeders into the database
+  cfg.seederStorage = 'sequelize';
   fs.writeFileSync('./migrations/' + ENV + '.json', JSON.stringify(cfg))
 }
 module.exports =

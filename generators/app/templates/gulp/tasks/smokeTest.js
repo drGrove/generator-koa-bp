@@ -19,10 +19,8 @@ gulp.task('smokeTest', ['lint'], function() {
 
   var testSuites = require(path.join(PROJECT_ROOT, '/test/e2e/suites.json'));
 
-  var options = minimist(process.argv.slice(2), {})
-
   if (!process.env.MOCHA_SUITES) {
-    process.env.MOCHA_SUITES = options.suites ? options.suites : 'all'
+    process.env.MOCHA_SUITES = 'all';
   }
 
   gulp
