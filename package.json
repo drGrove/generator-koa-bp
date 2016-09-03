@@ -71,8 +71,7 @@
   "repository": "git@github.com:drGrove/generator-koa-bp",
   "scripts": {
     "prepublish": "gulp prepublish",
-    "test": "gulp",
-    //"posttest": "cat ./coverage/lcov.info | ./node_modules/.bin/codacy-coverage && rm -rf ./coverage"
+    "test": "gulp"
   },
   "license": "MIT"
 }
