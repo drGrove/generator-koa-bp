@@ -8,7 +8,7 @@ gulp.task('coveralls', ['test'], function() {
     return;
   }
 
-  return gulp.src(path.join(__dirname, 'coverage/lcov.info'))
+  return gulp.src(path.join(__dirname, '/../../coverage/lcov.info'))
     .pipe(coveralls());
 });
 
