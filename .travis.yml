@@ -8,7 +8,8 @@ addons:
   apt:
     packages:
     - expect
-after_success: coveralls
+after_success:
+  - coveralls
 env:
   global:
   - MOCHA_SUITES=all
