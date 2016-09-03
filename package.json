@@ -72,7 +72,7 @@
   "scripts": {
     "prepublish": "gulp prepublish",
     "test": "gulp",
-    "posttest": "cat ./coverage/lcov.info | ./node_modules/.bin/codacy-coverage && rm -rf ./coverage"
+    //"posttest": "cat ./coverage/lcov.info | ./node_modules/.bin/codacy-coverage && rm -rf ./coverage"
   },
   "license": "MIT"
 }
