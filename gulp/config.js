@@ -2,7 +2,7 @@
 
 module.exports = {
   Paths: {
-    ALL_JS: '**/**.js',
+    ALL_JS: 'generators/**/*.js',
     GENERATOR_TEMPLATES: 'generators/*/templates/**/**.js',
     IGNORE_GENERATOR_TEMPLATES: '!generators/*/templates/**/**.js',
     GENERATORS: 'generators/**/*.js',
