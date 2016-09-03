@@ -9,7 +9,8 @@ addons:
     packages:
     - expect
 after_success:
-  - coveralls
+  - cat ./coverge/lcov.info | ./node_modules/.bin/codacy-coverage
+  - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
 env:
   global:
   - MOCHA_SUITES=all

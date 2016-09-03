@@ -26,11 +26,11 @@
   "devDependencies": {
     "babel-eslint": "^6.0.2",
     "codacy-coverage": "^2.0.0",
+    "coveralls": "^2.11.12",
     "eslint": "^3.4.0",
     "eslint-config-google": "^0.5.0",
     "expect": "^1.20.2",
     "gulp": "^3.9.0",
-    "gulp-coveralls": "^0.1.0",
     "gulp-eslint": "^3.0.1",
     "gulp-exclude-gitignore": "^1.0.0",
     "gulp-istanbul": "^0.10.3",
@@ -71,8 +71,7 @@
   "repository": "git@github.com:drGrove/generator-koa-bp",
   "scripts": {
     "prepublish": "gulp prepublish",
-    "test": "gulp",
-    "posttest": "cat coverage/lcov.info | ./node_modules/.bin/codacy-coverage -c $(git rev-parse HEAD)"
+    "test": "gulp"
   },
   "license": "MIT"
 }

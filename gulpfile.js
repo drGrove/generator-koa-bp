@@ -10,8 +10,4 @@ fs.readdirSync('./gulp/tasks').filter(function(file) {
 });
 
 gulp.task('prepublish', ['nsp']);
-gulp.task('default', runSequence(
-  'static',
-  'test',
-  'coveralls'
-));
+gulp.task('default', ['lint', 'test'])

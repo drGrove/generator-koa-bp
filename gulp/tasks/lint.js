@@ -4,7 +4,7 @@ var config = require('../config');
 var excludeGitignore = require('gulp-exclude-gitignore');
 var eslint = require('gulp-eslint');
 
-gulp.task('static', function() {
+gulp.task('lint', function() {
   return gulp.src([
     config.Paths.ALL_JS,
     config.Paths.IGNORE_GENERATOR_TEMPLATES
