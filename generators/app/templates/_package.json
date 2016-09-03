@@ -25,11 +25,11 @@
     "koa-router": "^5.1.2",
     "koa-sequelize-transaction": "0.0.1",
     "koa-trace": "^1.0.0",
-    "mysql": "^2.9.0",
     "path": "^0.11.14",
+    "mysql2": "^1.0.0-rc.11",
     "querystring": "^0.2.0",
     "scandir": "^0.1.2",
-    "sequelize": "3.23.4",
+    "sequelize": "4.0.0-1",
     "node-env-file": "^0.1.7",
     "winston": "^1.1.1"
   },

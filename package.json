@@ -25,7 +25,7 @@
   },
   "devDependencies": {
     "babel-eslint": "^6.0.2",
-    "codacy": "^1.0.1-1",
+    "codacy-coverage": "^2.0.0",
     "eslint": "^3.4.0",
     "eslint-config-google": "^0.5.0",
     "expect": "^1.20.2",
@@ -41,7 +41,6 @@
     "mocha-lcov-reporter": "^1.2.0",
     "run-sequence": "^1.2.2",
     "sequelize": "^3.24.0",
-    "wrench": "^1.5.9",
     "yeoman-assert": "^2.0.0",
     "yeoman-test": "^1.0.0"
   },
@@ -73,7 +72,7 @@
   "scripts": {
     "prepublish": "gulp prepublish",
     "test": "gulp",
-    "posttest": "cat ./coverage/lcov.info | ./node_modules/.bin/codacy-coverage && rm -rf ./coverage"
+    "posttest": "cat coverage/lcov.info | ./node_modules/.bin/codacy-coverage -c $(git rev-parse HEAD)"
   },
   "license": "MIT"
 }
