@@ -32,5 +32,5 @@ MIT © [Danny Grove](https://dannygrove.com)
 [travis-url]: https://travis-ci.org/drGrove/generator-koa-bp
 [daviddm-image]: https://david-dm.org/drGrove/generator-koa-bp.svg?theme=shields.io
 [daviddm-url]: https://david-dm.org/drGrove/generator-koa-bp
-[coveralls-image]: https://coveralls.io/repos/drGrove/generator-koa-bp/badge.svg
-[coveralls-url]: https://coveralls.io/r/drGrove/generator-koa-bp
+[coveralls-image]: https://coveralls.io/repos/drGrove/generator-koa-bp/badge.svg?branch=master
+[coveralls-url]: https://coveralls.io/r/drGrove/generator-koa-bp?branch=master
