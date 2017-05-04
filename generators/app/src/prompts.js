@@ -46,7 +46,7 @@ module.exports = function(KoaBP) {
       type: 'confirm',
       name: 'includeOAuthProviders',
       message: 'Would you like to include OAuth Providers ' +
-        '(Gooogle, Facebook, Linkined)?',
+        '(Gooogle, Facebook, Linkedin)?',
       default: true,
       store: true
     }, {
